@@ -35,7 +35,13 @@ _How might we design laptops that generate their own energy and store data local
 _How might we build modular laptops that adapt to each user’s needs?_
 
 ### Energy Distribution
+The current energy system is centralized, with electricity generated at large power plants and transmitted through high-voltage lines to homes and businesses. Residential solar or small-scale generation is limited by regulations, and any excess energy is fed back to the grid. The utility then distributes this energy to other consumers, with homeowners typically receiving credit rather than direct payment from neighbors.
+
 ![Sketch 3](sketches/img1.jpg)
+
+_How might we enable people to sell excess electricity directly to their neighbors instead of only through the grid?_
+
+_How might we simplify global investment in renewable energy by centering it around renewable energy credits?_
 
 ## Proposed Models
 
