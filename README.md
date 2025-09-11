@@ -19,6 +19,9 @@
 ### Laptop Lifecycle
 ### Energy Distribution
 
+## Proposed Models
+### Own Your Data
+### Modular Laptop
 
 ## State of Knowledge of field
 
