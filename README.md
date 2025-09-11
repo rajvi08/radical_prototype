@@ -26,7 +26,13 @@ _How might we design a decentralized data storage system, like a wallet, fully c
 
 _________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 ### Laptop Lifecycle
+Most laptops today depend on external energy sources, cloud storage, and fixed hardware configurations. When performance needs change, users often replace the entire device rather than upgrade parts. This creates a linear cycle of manufacture, use, and disposal, with limited user control over repair, energy, or data.
+
 ![Sketch 2](sketches/img2.jpg)
+
+_How might we design laptops that generate their own energy and store data locally?_
+
+_How might we build modular laptops that adapt to each user’s needs?_
 
 ### Energy Distribution
 ![Sketch 3](sketches/img1.jpg)
