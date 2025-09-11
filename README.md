@@ -24,6 +24,7 @@ _How might we build a secure user-owned database that connects to sites, allows 
 
 _How might we design a decentralized data storage system, like a wallet, fully controlled by the user?_
 
+_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 ### Laptop Lifecycle
 ![Sketch 2](sketches/img2.jpg)
 
