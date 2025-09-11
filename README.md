@@ -143,9 +143,15 @@ _Experience/Projects:_
 _________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 ## Map of Community of Practice
 
+1)_Solid_ by Tim Berners Lee is a web decentralization platform.This project gives users control over their personal data. It stores information in individual data pods rather than centralized servers. Users can selectively share data with apps while maintaining privacy and ownership.
+2)_Framework Computers_ makes modular laptops designed for easy repair, upgrade, and customization. Their system allows users to replace components like the keyboard, battery, or ports without discarding the whole device.
+3)_Brooklyn Microgrid_ The Brooklyn Microgrid (BMG) is a community-driven initiative that began in 2016 in Brooklyn, New York. It enables residents to buy and sell locally (P2P) generated solar energy using a blockchain-based platform called Exergy. 
+
 _________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 ## Research Methods
 
+_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+## Technology Eco-system Diagram
 
 _________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 ## Intent of purpose to 'Radical Prototype'
