@@ -59,6 +59,87 @@ ________________________________________________________________________________
 
 Personal Knowledge Map
 
+1. Architecture & Design
+
+_Core Skills:_
+
+-Sketching & Ideation
+-Spatial Design & Planning
+-Making & Craftsmanship
+-Understanding Local Norms & Regulations
+
+_Experience/Projects:_
+
+-Traditional architectural projects
+-Site analysis and feasibility studies
+-Integration of design with local regulations
+
+2. Real Estate & Development
+
+_Core Skills:_
+
+-Client Negotiations
+-Onsite Decision Making
+-Management & Coordination
+-Raising Capital / Investment Strategy
+
+_Experience/Projects:_
+
+-Working as a partner in real estate development
+-Project management across design & construction
+
+3. Design Technology & Fabrication
+
+_Core Skills:_
+
+-Transformable / Deployable Structures
+-Kinetic Facades
+
+Digital Fabrication
+
+-Rapid Prototyping
+-Microcontrollers & Hardware Integration
+
+_Experience/Projects:_
+
+-MakerLab: learned advanced digital fabrication methods
+-Devices / electronics experimentation
+-Laptop project development
+-Prototype creation using CAD/CAM & other fabrication tools
+
+4. Computational Design & AI
+
+_Core Skills:_
+
+-Transformers architecture
+-Machine learning on small datasets
+-Algorithmic thinking & model implementation
+
+_Experience/Projects:_
+
+-Exploring neural network architectures
+-Thinking about low-data training models
+-Conceptual integration of AI with physical systems
+
+5. Energy & Sustainability
+
+_Core Skills:_
+
+-Energy market & business understanding
+-Renewable energy systems (conceptual understanding)
+-Systems thinking in distributed energy
+
+_Experience/Projects:_
+
+-Studying energy distribution & generation
+-Designing concepts for user-controlled energy systems
+
+6. Cross-domain / Integrative Skills
+
+-Rapid problem-solving and ideation across design, tech, and business
+-Holistic systems thinking (design ↔ tech ↔ business)
+-Product conceptualization and prototyping
+-Bridging physical and digital domains
 _________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 ## Map of Community of Practice
 
