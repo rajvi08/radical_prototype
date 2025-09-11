@@ -16,7 +16,7 @@
 ## Current Ecosystems
 
 ### Personal Data, Data Transfer & Digital Identity
-![Sketch 5](sketches/img5.jpg)
+![Sketch 1](sketches/img5.jpg)
 
 ### Laptop Lifecycle
 ![Sketch 2](sketches/img2.jpg)
@@ -30,7 +30,7 @@
 ![Sketch 4](sketches/img4.jpg)
 
 ### Modular Laptop
-![Sketch 3](sketches/img3.jpg)
+![Sketch 5](sketches/img3.jpg)
 
 ## State of Knowledge of field
 
