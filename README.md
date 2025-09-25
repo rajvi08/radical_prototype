@@ -1,162 +1,229 @@
-# DESIGN 8131 Specialization Project 1
+# Three.js Foundations
 
-**Fall 2025**  
+## What is Three.js?
 
-- **Student:** Rajvi Ranjit Patil
-- **Email:** rp674@cornell.edu
+Three.js is a popular JavaScript library that makes it easy to create and display animated 3D computer graphics in a web browser using WebGL. It provides a high-level API that abstracts away the complexity of WebGL programming, making 3D graphics accessible to web developers.
+
+## Core Concepts
+
+### 1. Scene
+The **Scene** is the container that holds all the 3D objects, lights, and cameras. Think of it as the world where your 3D content exists.
+
+```javascript
+const scene = new THREE.Scene();
+```
+
+### 2. Camera
+The **Camera** defines the viewpoint from which the scene is rendered. Three.js provides two main camera types:
+
+- **PerspectiveCamera**: Mimics human vision with perspective projection
+- **OrthographicCamera**: Provides parallel projection without perspective distortion
 
-- **Instructor:** Jose Sanchez
-
-
---- 
-
-## Current Ecosystems
-
-### Personal Data, Data Transfer & Digital Identity
-
-Most digital platforms collect and store user data in centralized systems. This data is shared or sold to third parties, often without clear consent. Users receive free services in return, but have little control over how their data is used.
-
-![Sketch 1](sketches/img5.jpg)
-
-_How might we give users more control over their data and create value beyond the services offered by companies?_
-
-_How might we build a secure user-owned database that connects to sites, allows selective sharing, and protects private data?_
-
-_How might we design a decentralized data storage system, like a wallet, fully controlled by the user?_
-
-### Laptop Lifecycle
-
-Most laptops today depend on external energy sources, cloud storage, and fixed hardware configurations. When performance needs change, users often replace the entire device rather than upgrade parts. This creates a linear cycle of manufacture, use, and disposal, with limited user control over repair, energy, or data.
-
-![Sketch 2](sketches/img2.jpg)
-
-_How might we design laptops that generate their own energy and store data locally?_
-
-_How might we build modular laptops that adapt to each user’s needs?_
-
-### Energy Distribution
-
-The current energy system is centralized, with electricity generated at large power plants and transmitted through high-voltage lines to homes and businesses. Residential solar or small-scale generation is limited by regulations, and any excess energy is fed back to the grid. The utility then distributes this energy to other consumers, with homeowners typically receiving credit rather than direct payment from neighbors.
-
-![Sketch 3](sketches/img1.jpg)
-
-_How might we enable people to sell excess electricity directly to their neighbors instead of only through the grid?_
-
-_How might we simplify global investment in renewable energy by centering it around renewable energy credits?_
-
-_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
-## Proposed Models
-
-### Own Your Data
-![Sketch 4](sketches/img4.jpg)
-
-### Modular Laptop
-![Sketch 5](sketches/img3.jpg)
-
-
-_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
-## State of Knowledge of field
-
-Personal Knowledge Map
-
-1. Architecture & Design
-
-_Core Skills:_
-
--Sketching & Ideation
--Spatial Design & Planning
--Making & Craftsmanship
--Understanding Local Norms & Regulations
-
-_Experience/Projects:_
-
--Traditional architectural projects
--Site analysis and feasibility studies
--Integration of design with local regulations
-
-2. Real Estate & Development
-
-_Core Skills:_
-
--Client Negotiations
--Onsite Decision Making
--Management & Coordination
--Raising Capital / Investment Strategy
-
-_Experience/Projects:_
-
--Working as a partner in real estate development
--Project management across design & construction
-
-3. Design Technology & Fabrication
-
-_Core Skills:_
-
--Transformable / Deployable Structures
--Kinetic Facades
-
-Digital Fabrication
-
--Rapid Prototyping
--Microcontrollers & Hardware Integration
-
-_Experience/Projects:_
-
--MakerLab: learned advanced digital fabrication methods
--Devices / electronics experimentation
--Laptop project development
--Prototype creation using CAD/CAM & other fabrication tools
-
-4. Computational Design & AI
-
-_Core Skills:_
-
--Transformers architecture
--Machine learning on small datasets
--Algorithmic thinking & model implementation
-
-_Experience/Projects:_
-
--Exploring neural network architectures
--Thinking about low-data training models
--Conceptual integration of AI with physical systems
-
-5. Energy & Sustainability
-
-_Core Skills:_
-
--Energy market & business understanding
--Renewable energy systems (conceptual understanding)
--Systems thinking in distributed energy
-
-_Experience/Projects:_
-
--Studying energy distribution & generation
--Designing concepts for user-controlled energy systems
-
-6. Cross-domain / Integrative Skills
-
--Rapid problem-solving and ideation across design, tech, and business
--Holistic systems thinking (design ↔ tech ↔ business)
--Product conceptualization and prototyping
--Bridging physical and digital domains
-_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
-## Map of Community of Practice
-
-1)_Solid_ by Tim Berners Lee is a web decentralization platform.This project gives users control over their personal data. It stores information in individual data pods rather than centralized servers. Users can selectively share data with apps while maintaining privacy and ownership.
-
-2)_Framework Computers_ makes modular laptops designed for easy repair, upgrade, and customization. Their system allows users to replace components like the keyboard, battery, or ports without discarding the whole device.
-
-3)_Brooklyn Microgrid_ The Brooklyn Microgrid (BMG) is a community-driven initiative that began in 2016 in Brooklyn, New York. It enables residents to buy and sell locally (P2P) generated solar energy using a blockchain-based platform called Exergy. 
-
-_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
-## Research Methods
-
-_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
-## Technology Eco-system Diagram
-
-_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
-## Intent of purpose to 'Radical Prototype'
-
-## Proposed Color Scheme ffbe0b,fb5607,ff006e,8338ec,3a86ff,8ac926
-
+```javascript
+// Perspective camera
+const camera = new THREE.PerspectiveCamera(
+    75,                    // Field of view (FOV)
+    window.innerWidth / window.innerHeight,  // Aspect ratio
+    0.1,                   // Near clipping plane
+    1000                   // Far clipping plane
+);
+```
+
+### 3. Renderer
+The **Renderer** is responsible for drawing the scene from the camera's perspective onto the canvas. It uses WebGL to perform the actual rendering.
+
+```javascript
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+```
+
+### 4. Geometry
+**Geometry** defines the shape and structure of 3D objects. It contains vertices, faces, and other geometric data.
+
+```javascript
+// Box geometry
+const geometry = new THREE.BoxGeometry(1, 1, 1);
+
+// Sphere geometry
+const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
+```
+
+### 5. Material
+**Material** defines how the surface of a 3D object appears, including color, texture, transparency, and other visual properties.
+
+```javascript
+// Basic material
+const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+
+// Standard material with lighting
+const material = new THREE.MeshStandardMaterial({ 
+    color: 0x00ff00,
+    metalness: 0.5,
+    roughness: 0.5
+});
+```
+
+### 6. Mesh
+A **Mesh** combines geometry and material to create a visible 3D object that can be added to the scene.
+
+```javascript
+const cube = new THREE.Mesh(geometry, material);
+scene.add(cube);
+```
+
+## Essential Components
+
+### Lights
+Lighting is crucial for realistic 3D rendering. Three.js provides several light types:
+
+- **AmbientLight**: Provides uniform lighting from all directions
+- **DirectionalLight**: Simulates sunlight (parallel rays)
+- **PointLight**: Emits light in all directions from a single point
+- **SpotLight**: Emits light in a cone shape
+
+```javascript
+// Ambient light
+const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
+
+// Directional light
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+directionalLight.position.set(5, 5, 5);
+
+scene.add(ambientLight);
+scene.add(directionalLight);
+```
+
+### Animation Loop
+To create animated scenes, you need an animation loop that continuously renders the scene:
+
+```javascript
+function animate() {
+    requestAnimationFrame(animate);
+    
+    // Rotate the cube
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+    
+    // Render the scene
+    renderer.render(scene, camera);
+}
+
+animate();
+```
+
+## Basic Setup Template
+
+Here's a minimal Three.js setup:
+
+```javascript
+// Scene
+const scene = new THREE.Scene();
+
+// Camera
+const camera = new THREE.PerspectiveCamera(
+    75, 
+    window.innerWidth / window.innerHeight, 
+    0.1, 
+    1000
+);
+
+// Renderer
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+// Geometry and Material
+const geometry = new THREE.BoxGeometry();
+const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+const cube = new THREE.Mesh(geometry, material);
+scene.add(cube);
+
+// Position camera
+camera.position.z = 5;
+
+// Animation loop
+function animate() {
+    requestAnimationFrame(animate);
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+    renderer.render(scene, camera);
+}
+
+animate();
+```
+
+## Key Features
+
+### 1. Cross-browser Compatibility
+Three.js handles WebGL compatibility across different browsers and devices.
+
+### 2. Rich Geometry Library
+Pre-built geometries for common shapes:
+- BoxGeometry, SphereGeometry, CylinderGeometry
+- PlaneGeometry, TorusGeometry, ConeGeometry
+- And many more...
+
+### 3. Material System
+Various material types for different visual effects:
+- MeshBasicMaterial (no lighting)
+- MeshLambertMaterial (diffuse lighting)
+- MeshPhongMaterial (specular highlights)
+- MeshStandardMaterial (physically-based rendering)
+- MeshPhysicalMaterial (advanced PBR)
+
+### 4. Loaders
+Built-in loaders for importing 3D models and textures:
+- GLTFLoader, OBJLoader, FBXLoader
+- TextureLoader, CubeTextureLoader
+- And many more...
+
+### 5. Controls
+Camera controls for interactive scenes:
+- OrbitControls (mouse/touch camera control)
+- FlyControls, FirstPersonControls
+- PointerLockControls
+
+## Getting Started
+
+1. **Include Three.js**: Add the library to your HTML
+   ```html
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+   ```
+
+2. **Create a container**: Add a canvas element or let Three.js create one
+
+3. **Set up the basic scene**: Scene, camera, and renderer
+
+4. **Add objects**: Create geometries, materials, and meshes
+
+5. **Add lighting**: Essential for realistic rendering
+
+6. **Animate**: Use requestAnimationFrame for smooth animation
+
+## Best Practices
+
+1. **Performance**: Use instancing for repeated objects
+2. **Memory Management**: Dispose of geometries and materials when no longer needed
+3. **Responsive Design**: Handle window resize events
+4. **Error Handling**: Check for WebGL support
+5. **Optimization**: Use appropriate level of detail (LOD) for complex scenes
+
+## Resources
+
+- [Official Three.js Documentation](https://threejs.org/docs/)
+- [Three.js Examples](https://threejs.org/examples/)
+- [Three.js Editor](https://threejs.org/editor/)
+- [WebGL Fundamentals](https://webglfundamentals.org/)
+
+## Next Steps
+
+Once you understand these foundations, explore:
+- Advanced materials and shaders
+- 3D model loading and animation
+- Post-processing effects
+- Physics integration
+- VR/AR applications
+- Performance optimization techniques
+
+Three.js opens up a world of possibilities for creating immersive 3D web experiences!
