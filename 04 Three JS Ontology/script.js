@@ -1,6 +1,41 @@
-// Three.js Scene Setup
+// Three.js Ontological Diagram
 let scene, camera, renderer, controls;
-let cube, sphere, torus;
+let entities = {};
+let connections = [];
+
+    // Entity definitions with increased distances and orange color
+    const entityData = {
+        'Generator': { pos: [-12, 6, -4], type: 'Power Source', domain: 'Energy', color: 0xfb5607 },
+        'Transmission Line': { pos: [-8, 2, -2], type: 'Transmission', domain: 'Energy', color: 0xfb5607 },
+        'Substation': { pos: [-4, 4, 0], type: 'Distribution', domain: 'Energy', color: 0xfb5607 },
+        'Home': { pos: [0, 0, 0], type: 'Consumption', domain: 'Both', color: 0xfb5607 },
+        'Appliances': { pos: [-2, 6, 2], type: 'Device', domain: 'Energy', color: 0xfb5607 },
+        'Humans': { pos: [2, 2, -2], type: 'User', domain: 'Both', color: 0xfb5607 },
+        'Gadgets': { pos: [6, 0, 4], type: 'Device', domain: 'Data', color: 0xfb5607 },
+        'Modem': { pos: [10, 4, 2], type: 'Router', domain: 'Data', color: 0xfb5607 },
+        'Cell Tower': { pos: [14, 8, -2], type: 'Telecom Node', domain: 'Data', color: 0xfb5607 },
+        'ISP': { pos: [18, 2, 0], type: 'Internet Provider', domain: 'Data', color: 0xfb5607 },
+        'Fiber Optics': { pos: [22, 6, 4], type: 'Network Medium', domain: 'Data', color: 0xfb5607 },
+        'IXP': { pos: [26, 0, -4], type: 'Exchange Point', domain: 'Data', color: 0xfb5607 },
+        'Data Center Server': { pos: [30, 4, 2], type: 'Storage', domain: 'Data', color: 0xfb5607 }
+    };
+
+// Connection definitions
+const connectionData = [
+    ['Generator', 'Transmission Line'],
+    ['Transmission Line', 'Substation'],
+    ['Substation', 'Home'],
+    ['Home', 'Appliances'],
+    ['Home', 'Humans'],
+    ['Humans', 'Gadgets'],
+    ['Gadgets', 'Modem'],
+    ['Modem', 'Cell Tower'],
+    ['Cell Tower', 'ISP'],
+    ['ISP', 'Fiber Optics'],
+    ['Fiber Optics', 'IXP'],
+    ['IXP', 'Data Center Server'],
+    ['Generator', 'Data Center Server'] // Direct energy connection to data centers
+];
 
 function init() {
     // Get canvas element
@@ -8,16 +43,16 @@ function init() {
     
     // Scene
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xf0f0f0); // Very light gray background
+    scene.background = new THREE.Color(0xff006e); // Pink background
     
     // Camera
     camera = new THREE.PerspectiveCamera(
         50, 
         canvas.clientWidth / canvas.clientHeight, 
-        0.001,  // Reduced near clipping plane to see lines when very close
+        0.1,
         1000
     );
-    camera.position.set(5, 5, 5);
+    camera.position.set(0, 5, 20);
     
     // Renderer
     renderer = new THREE.WebGLRenderer({ 
@@ -35,12 +70,13 @@ function init() {
     controls.enableZoom = true;
     controls.enablePan = true;
     
-    const gridHelper = new THREE.GridHelper(20, 20, 0x888888, 0x888888);
-    gridHelper.material.depthTest = true;
-    scene.add(gridHelper);
+    // Grid removed for cleaner look
     
-    // Create primitives
-    createPrimitives();
+    // Create entities
+    createEntities();
+    
+    // Create connections
+    createConnections();
     
     // Add lighting
     addLighting();
@@ -52,45 +88,96 @@ function init() {
     window.addEventListener('resize', onWindowResize);
 }
 
-function createPrimitives() {
-    // Cube - Green
-    const cubeGeometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
-    const cubeMaterial = new THREE.MeshStandardMaterial({ 
-        color: 0x00ff00,  // Green
-        metalness: 0.1,
-        roughness: 0.3
+function createEntities() {
+    Object.keys(entityData).forEach(entityName => {
+        const data = entityData[entityName];
+        
+        // All entities are now spheres
+        const geometry = new THREE.SphereGeometry(0.8, 16, 16);
+        
+        // Create material
+        const material = new THREE.MeshStandardMaterial({ 
+            color: data.color,
+            metalness: 0.1,
+            roughness: 0.3
+        });
+        
+        // Create mesh
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.position.set(data.pos[0], data.pos[1], data.pos[2]);
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+        
+        // Add label
+        const label = createTextLabel(entityName, data.type, data.domain);
+        label.position.set(data.pos[0], data.pos[1] + 1.5, data.pos[2]);
+        
+        // Store entity
+        entities[entityName] = { mesh, label, data };
+        scene.add(mesh);
+        scene.add(label);
     });
-    cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-    cube.position.set(-2, 0.75, 0);
-    cube.castShadow = true;
-    scene.add(cube);
+}
+
+function createTextLabel(name, type, domain) {
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    canvas.width = 256;
+    canvas.height = 64;
     
-    // Sphere - Pink
-    const sphereGeometry = new THREE.SphereGeometry(1.2, 32, 32);
-    const sphereMaterial = new THREE.MeshStandardMaterial({ 
-        color: 0xff69b4,  // Pink
-        metalness: 0.1,
-        roughness: 0.3
+    context.fillStyle = '#ff006e';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    
+    context.fillStyle = '#000000';
+    context.font = '12px Arial';
+    context.textAlign = 'center';
+    context.fillText(name, canvas.width/2, 20);
+    context.fillText(type, canvas.width/2, 35);
+    context.fillText(domain, canvas.width/2, 50);
+    
+    const texture = new THREE.CanvasTexture(canvas);
+    const material = new THREE.SpriteMaterial({ map: texture });
+    const sprite = new THREE.Sprite(material);
+    sprite.scale.set(4, 1, 1);
+    
+    return sprite;
+}
+
+function createConnections() {
+    connectionData.forEach(([from, to]) => {
+        if (entities[from] && entities[to]) {
+            const fromPos = entities[from].mesh.position;
+            const toPos = entities[to].mesh.position;
+            
+            // Calculate distance and direction
+            const distance = fromPos.distanceTo(toPos);
+            const direction = new THREE.Vector3().subVectors(toPos, fromPos).normalize();
+            
+            // Create cylindrical pipe
+            const pipeGeometry = new THREE.CylinderGeometry(0.1, 0.1, distance, 8);
+            const pipeMaterial = new THREE.MeshStandardMaterial({ 
+                color: 0xffbe0b,
+                metalness: 0.2,
+                roughness: 0.4
+            });
+            
+            const pipe = new THREE.Mesh(pipeGeometry, pipeMaterial);
+            
+            // Position pipe between the two spheres
+            const midPoint = new THREE.Vector3().addVectors(fromPos, toPos).multiplyScalar(0.5);
+            pipe.position.copy(midPoint);
+            
+            // Orient pipe to connect the spheres
+            pipe.lookAt(toPos);
+            pipe.rotateX(Math.PI / 2);
+            
+            pipe.castShadow = true;
+            pipe.receiveShadow = true;
+            
+            scene.add(pipe);
+            connections.push(pipe);
+        }
     });
-    sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-    sphere.position.set(2, 1.2, 0);
-    sphere.castShadow = true;
-    scene.add(sphere);
-    
-    // Torus - Light blue
-    const torusGeometry = new THREE.TorusGeometry(0.9, 0.3, 16, 100);
-    const torusMaterial = new THREE.MeshStandardMaterial({ 
-        color: 0x87ceeb,  // Light blue
-        metalness: 0.1,
-        roughness: 0.3
-    });
-    torus = new THREE.Mesh(torusGeometry, torusMaterial);
-    torus.position.set(0, 0.9, -2);
-    torus.rotation.x = Math.PI / 2;
-    torus.castShadow = true;
-    scene.add(torus);
-    
-    // Remove ground plane to show only wireframe grid
 }
 
 function addLighting() {

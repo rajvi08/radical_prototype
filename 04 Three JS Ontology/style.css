@@ -2,9 +2,9 @@
 /* Using system fonts for maximum compatibility and minimal aesthetic */
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
-  background-color: #000000;
-  color: #ffffff;
+  font-family: 'Mini Pixel-7', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+  background-color: #ff006e;
+  color: #000000;
   margin: 0;
   padding: 0;
   font-weight: 300;
@@ -18,14 +18,17 @@ header {
   margin: 0 auto;
   padding: 24px 40px;
   border-bottom: 1px solid #333;
-  font-size: 14px;
+  font-size: 19px;
+  font-family: 'Mini Pixel-7', monospace;
 }
 
 header .left {
-  color: #888;
+  color: #000000;
   width: 100px;
-  font-size: 16px;
+  font-size: 21px;
   font-weight: 500;
+  font-family: 'Mini Pixel-7', monospace;
+  white-space: nowrap; /* keep "Cornell Tech" on a single line */
 }
 
 header .center {
@@ -33,12 +36,14 @@ header .center {
   text-align: left;
   margin-left: 100px;
   flex-grow: 1;
-  color: #ffffff;
+  color: #000000;
+  font-family: 'Mini Pixel-7', monospace;
 }
 
 header .center span {
-  font-size: 12px;
-  color: #aaa;
+  font-size: 17px;
+  color: #000000;
+  font-family: 'Mini Pixel-7', monospace;
 }
 
 header .right {
@@ -47,70 +52,111 @@ header .right {
 }
 
 header .right a {
-  color: #ffffff;
+  color: #000000;
   text-decoration: none;
   font-weight: 400;
+  font-family: 'Mini Pixel-7', monospace;
 }
 
 header .right a:hover {
-  color: #ccc;
+  color: #000000;
 }
 
 main {
-  max-width: 800px;
+  max-width: none;
   margin: 60px 0;
-  padding: 0 40px;
-  margin-left: auto;
-  margin-right: auto;
+  padding-left: 240px; /* align with header center start */
+  padding-right: 200px; /* reduce content length on the right */
 }
 
 .project-meta {
-  font-size: 14px;
-  color: #aaa;
+  font-size: 19px;
+  color: #000000;
   margin-bottom: 8px;
+  font-family: 'Mini Pixel-7', monospace;
 }
 
 .project-title {
-  font-size: 24px;
+  font-size: 31px;
   font-weight: 400;
   margin-bottom: 4px;
-  color: #ffffff;
+  color: #000000;
+  font-family: 'Poxast', 'Mini Pixel-7', sans-serif;
 }
 
 .course-info {
-  font-size: 14px;
-  color: #aaa;
+  font-size: 19px;
+  color: #000000;
   margin-bottom: 8px;
   font-weight: 400;
   letter-spacing: 0.5px;
+  font-family: 'Mini Pixel-7', monospace;
 }
 
 .project-subtitle {
-  font-size: 16px;
-  color: #aaa;
+  font-size: 21px;
+  color: #000000;
   margin-bottom: 24px;
+  font-family: 'Mini Pixel-7', monospace;
 }
 
 .advisor {
-  font-size: 14px;
+  font-size: 19px;
   margin-bottom: 40px;
-  color: #ccc;
+  color: #000000;
+  font-family: 'Mini Pixel-7', monospace;
 }
 
 .section-title {
-  font-weight: 700;
-  text-transform: uppercase;
+  font-weight: 400;
+  text-transform: none;
   margin-top: 40px;
   margin-bottom: 12px;
-  font-size: 14px;
-  color: #ffffff;
+  font-size: 31px;
+  color: #000000;
+  font-family: 'Poxast', 'Mini Pixel-7', sans-serif;
 }
 
 p {
-  font-size: 16px;
+  font-size: 21px;
   line-height: 1.6;
   margin-bottom: 24px;
-  color: #ffffff;
+  color: #000000;
+  text-align: justify;
+  text-justify: inter-word;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.infrastructure-section {
+  margin-bottom: 30px;
+}
+
+.infrastructure-section h3 {
+  font-family: 'Mini Pixel-7', monospace;
+  font-size: 19px;
+  font-weight: 400;
+  color: #000000;
+  margin-bottom: 15px;
+  text-transform: none;
+}
+
+.infrastructure-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.infrastructure-section li {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #000000;
+  margin-bottom: 8px;
+  padding-left: 0;
+}
+
+.infrastructure-section li strong {
+  font-weight: bold;
 }
 
 img.content-image {
@@ -121,6 +167,41 @@ img.content-image {
   border-radius: 4px;
 }
 
+.image-with-description {
+  display: flex;
+  gap: 20px;
+  margin: 40px 0;
+  align-items: flex-start;
+}
+
+.content-image-small {
+  width: 50%;
+  height: auto;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.image-description {
+  background-color: #ffbe0b;
+  padding: 20px;
+  border-radius: 8px;
+  flex: 1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-description p {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #000000;
+  text-align: left;
+  font-family: 'Mini Pixel-7', monospace;
+}
+
+.image-description p:last-child {
+  margin-bottom: 0;
+}
+
 /* Three.js Canvas Styles */
 .threejs-container {
   width: 100%;
@@ -128,8 +209,8 @@ img.content-image {
   margin: 40px 0;
   border-radius: 4px;
   overflow: hidden;
-  background-color: #000000;
-  border: 1px solid #333;
+  background-color: transparent; /* seamless with page */
+  border: none; /* remove border */
 }
 
 #threejs-canvas {
@@ -154,12 +235,12 @@ img.content-image {
   color: #000000;
   border: none;
   padding: 16px 32px;
-  font-size: 16px;
+  font-size: 21px;
   font-weight: 500;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-family: "Helvetica Neue", "Helvetica", sans-serif;
+  font-family: inherit;
 }
 
 .fullscreen-button:hover {
@@ -203,15 +284,15 @@ img.content-image {
   left: 20px;
   z-index: 1001;
   background-color: rgba(0, 0, 0, 0.7);
-  color: #ffffff;
+  color: #000000;
   border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 8px 16px;
-  font-size: 12px;
+  font-size: 17px;
   font-weight: 300;
   border-radius: 2px;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+  font-family: inherit;
   backdrop-filter: blur(10px);
   letter-spacing: 0.5px;
   text-transform: uppercase;
@@ -221,4 +302,128 @@ img.content-image {
   background-color: rgba(255, 255, 255, 0.9);
   color: #000000;
   border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Visual Map Styles */
+.visual-map-container {
+  margin: 40px 0;
+  position: relative;
+  min-height: 1020px;
+}
+
+.map-axes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.y-axis-label {
+  position: absolute;
+  left: -155px;
+  top: 700px;
+  transform: rotate(-90deg) scale(3);
+  font-family: 'Poxast', 'Mini Pixel-7', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: #cc0052;
+  white-space: nowrap;
+}
+
+.x-axis-label {
+  position: absolute;
+  bottom: 20px;
+  left: 210px;
+  transform: scale(3);
+  font-family: 'Poxast', 'Mini Pixel-7', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: #cc0052;
+}
+
+.map-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  gap: 40px;
+  height: 1020px;
+  padding: 60px 80px 240px 80px;
+}
+
+.map-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-box {
+  background: #ffbe0b;
+  border: none;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  max-width: 200px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.map-box:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+}
+
+.map-box img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.map-title {
+  font-family: 'Poxast', 'Mini Pixel-7', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.map-desc {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 12px;
+  color: #000000;
+  line-height: 1.3;
+}
+
+/* Grid lines for visual reference */
+.map-grid::before {
+  content: '';
+  position: absolute;
+  top: 60px;
+  left: 80px;
+  right: 80px;
+  bottom: 60px;
+  background-image: 
+    linear-gradient(to right, rgba(0,0,0,0.2) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.2) 1px, transparent 1px);
+  background-size: calc(100% / 4) calc(100% / 8);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* 0,0 reference point */
+.map-grid::after {
+  content: '';
+  position: absolute;
+  bottom: 60px;
+  left: 80px;
+  width: 8px;
+  height: 8px;
+  background: #000000;
+  border-radius: 50%;
+  z-index: 2;
 }
