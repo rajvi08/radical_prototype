@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Community Map - Radical_Prototype</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/poxast" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/mini-pixel-7" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="community-page">
+  <header>
+    <div class="left">Cornell Tech</div>
+    <div class="center">
+      Design Tech<br>
+      <span>DESIGN 8131 Specialization Project 1</span>
+    </div>
+    <div class="right">
+      <a href="inspirations.html">Antecedents</a>
+      <a href="community-map.html">Community Map</a>
+      <a href="new-terminology.html">New Terminology</a>
+      <a href="posters.html">Posters</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="project-meta">2025</div>
+    <div class="project-title">Community Map</div>
+    <div class="course-info">Interactive Network Visualization</div>
+
+    <div class="community-animation-container">
+      <div id="p5-community-canvas"></div>
+    </div>
+
+  </main>
+
+  <!-- p5.js library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+  <script>
+    // --- Interactive 2D Community Map Graph (Triangle + Zoom + Spread Out) ---
+    let allNodes = [];
+    let links = [];
+    let draggingNode = null;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    // Zoom & pan
+    let scaleFactor = 1;
+    let translateX = 0;
+    let translateY = 0;
+    let lastMouseX, lastMouseY;
+
+    // --- Categories with pink, orange, yellow color scheme ---
+    const categories = [
+      {id: "Energy", color: "#ff006e", size: 120}, // Pink
+      {id: "Intelligent", color: "#fb5607", size: 120}, // Orange
+      {id: "Adaptive", color: "#ffbe0b", size: 120} // Yellow
+    ];
+
+    // --- Companies & papers ---
+    const companies = [
+      "Strawberrye","CubePlus","Pavegen","Oklo","Rondo","Green Fluidics","Airiva","Emergo","SolSkin","75F","Verdigris",
+      "Google","Samsung","Spatial Pixel","Accton Smart Platform","Placeable","Cosmic","Brixel","Yeadon Space","Diffus Design","Ecoworks",
+      "IKEA","Clei","GoodDesign","Boxabl","Sierra Space","Max Space","OSS","SAGA","Hoberman Associates","Seele","Extech","Intershelter","Polymobyl","Parkly"
+    ];
+
+    const papers = [
+      {title:"From machine-to-machine to the Internet of Things", category:"Intelligent"},
+      {title:"Big data and Internet of Things", category:"Intelligent"},
+      {title:"Internet of Things: converging technologies", category:"Intelligent"},
+      {title:"Interactive architecture", category:"Adaptive"},
+      {title:"Always building: the programmable environment", category:"Adaptive"},
+      {title:"Alloplastic architecture: the design of an interactive", category:"Adaptive"},
+      {title:"The architectural relevance of Gordon Pask", category:"Intelligent"},
+      {title:"The human centrality of conversational learning", category:"Intelligent"},
+      {title:"Unpredictable cybernetic zoo – MAT200aF2015", category:"Intelligent"},
+      {title:"Towards a phenomenology of responsive architecture", category:"Adaptive"},
+      {title:"Catching up with the past: interactive environments", category:"Adaptive"},
+      {title:"Self-assembling robots as future of construction", category:"Adaptive"},
+      {title:"Exploring sensing-based kinetic design", category:"Adaptive"}
+    ];
+
+    // --- Links ---
+    const categoryLinks = [
+      ["Energy","Strawberrye"],["Energy","CubePlus"],["Energy","Pavegen"],["Energy","Oklo"],["Energy","Rondo"],["Energy","Green Fluidics"],["Energy","Airiva"],["Energy","Emergo"],["Energy","SolSkin"],["Energy","75F"],["Energy","Verdigris"],["Energy","Diffus Design"],
+      ["Intelligent","Google"],["Intelligent","Samsung"],["Intelligent","Spatial Pixel"],["Intelligent","Accton Smart Platform"],["Intelligent","Placeable"],["Intelligent","Cosmic"],["Intelligent","Brixel"],["Intelligent","Yeadon Space"],["Intelligent","Diffus Design"],["Intelligent","Ecoworks"],["Intelligent","Verdigris"],["Intelligent","75F"],
+      ["Adaptive","IKEA"],["Adaptive","Clei"],["Adaptive","GoodDesign"],["Adaptive","Boxabl"],["Adaptive","Sierra Space"],["Adaptive","Max Space"],["Adaptive","OSS"],["Adaptive","SAGA"],["Adaptive","Hoberman Associates"],["Adaptive","Seele"],["Adaptive","Extech"],["Adaptive","Intershelter"],["Adaptive","Polymobyl"],["Adaptive","Parkly"],["Adaptive","Brixel"],["Adaptive","SolSkin"]
+    ];
+
+    const crossLinks = [
+      ["SolSkin","Hoberman Associates"],
+      ["SolSkin","Green Fluidics"],
+      ["Sierra Space","Oklo"],
+      ["Max Space","Rondo"],
+      ["Brixel","Placeable"],
+      ["Verdigris","75F"]
+    ];
+
+    // --- Setup ---
+    function setup() {
+      let canvas = createCanvas(windowWidth * 2, windowHeight * 1.5); // Large canvas
+      canvas.parent('p5-community-canvas');
+      textAlign(CENTER, CENTER);
+      textStyle(BOLD);
+      textFont('Courier New'); // Use Courier New font
+
+      // Triangle positions for main categories
+      const cx = width/2, cy = height/2, r = 500;
+      allNodes.push({id:"Energy", type:"category", x:cx, y:cy-r/2, size:120, color:color("#ff006e"), vx:0, vy:0, fixed:false});
+      allNodes.push({id:"Intelligent", type:"category", x:cx - r/1.5, y:cy + r/2, size:120, color:color("#fb5607"), vx:0, vy:0, fixed:false});
+      allNodes.push({id:"Adaptive", type:"category", x:cx + r/1.5, y:cy + r/2, size:120, color:color("#ffbe0b"), vx:0, vy:0, fixed:false});
+
+      // Add company nodes
+      for (let c of companies){
+        let catNode = findCategoryForCompany(c);
+        let catColor = catNode ? catNode.color : color(200);
+        let lighter = lerpColor(catColor, color(255), 0.5);
+        allNodes.push({
+          id:c,
+          type:"company",
+          x: random(width*0.1, width*0.9),
+          y: random(height*0.1, height*0.9),
+          size:50,
+          color:lighter,
+          vx: random(-1,1),
+          vy: random(-1,1),
+          fixed:false
+        });
+      }
+
+      // Add paper nodes
+      for (let p of papers){
+        allNodes.push({
+          id:p.title,
+          type:"paper",
+          x: random(width*0.2, width*0.8),
+          y: random(height*0.2, height*0.8),
+          size:70,
+          color:color(220),
+          vx: random(-1,1),
+          vy: random(-1,1),
+          fixed:false,
+          category: p.category
+        });
+      }
+
+      // Add links
+      for(let l of [...categoryLinks,...crossLinks]) links.push({source:l[0],target:l[1]});
+      for(let p of papers) links.push({source:p.category,target:p.title});
+    }
+
+    // --- Draw ---
+    function draw(){
+      background(20);
+      push();
+      translate(translateX, translateY);
+      scale(scaleFactor);
+
+      physicsStep();
+
+      // Draw links
+      stroke(150,200); strokeWeight(2);
+      for(let l of links){
+        let a = getNode(l.source);
+        let b = getNode(l.target);
+        if(a && b) line(a.x,a.y,b.x,b.y);
+      }
+
+      // Draw nodes
+      noStroke();
+      for(let n of allNodes){
+        fill(n.color);
+        ellipse(n.x,n.y,n.size*2);
+        fill(0);
+        textSize(n.size/5);
+        drawMultilineText(n.id,n.x,n.y,n.size*2-10);
+      }
+
+      pop();
+    }
+
+    // --- Multiline text ---
+    function drawMultilineText(txt,x,y,w){
+      let words = txt.split(" "), line="", lines=[];
+      for(let i=0;i<words.length;i++){
+        let testLine = line+words[i]+" ";
+        if(textWidth(testLine)>w && line.length>0){ lines.push(line); line=words[i]+" "; }
+        else line=testLine;
+      }
+      lines.push(line);
+      let lh=textAscent()*1.2;
+      let startY=y-(lines.length-1)/2*lh;
+      for(let i=0;i<lines.length;i++) text(lines[i],x,startY+i*lh);
+    }
+
+    // --- Node helper ---
+    function getNode(id){ return allNodes.find(n=>n.id===id); }
+    function findCategoryForCompany(name){
+      for(let l of categoryLinks) if(l[1]===name) return getNode(l[0]);
+      return null;
+    }
+
+    // --- Physics ---
+    function physicsStep(){
+      let rep=8000, spring=0.003, damping=0.9;
+      for(let i=0;i<allNodes.length;i++){
+        for(let j=i+1;j<allNodes.length;j++){
+          let a=allNodes[i], b=allNodes[j];
+          let dx=b.x-a.x, dy=b.y-a.y;
+          let dist2=dx*dx+dy*dy+0.01;
+          let force=rep/dist2, fx=force*dx/dist2, fy=force*dy/dist2;
+          if(!a.fixed){ a.vx-=fx; a.vy-=fy; }
+          if(!b.fixed){ b.vx+=fx; b.vy+=fy; }
+        }
+      }
+
+      for(let l of links){
+        let a=getNode(l.source), b=getNode(l.target);
+        if(!a||!b) continue;
+        let dx=b.x-a.x, dy=b.y-a.y;
+        let dist=sqrt(dx*dx+dy*dy);
+        let diff=dist-400;
+        let force=spring*diff, fx=force*dx/dist, fy=force*dy/dist;
+        if(!a.fixed){ a.vx+=fx; a.vy+=fy; }
+        if(!b.fixed){ b.vx-=fx; b.vy-=fy; }
+      }
+
+      for(let n of allNodes){
+        if(!n.fixed){ n.vx*=damping; n.vy*=damping; n.x+=n.vx; n.y+=n.vy; }
+      }
+    }
+
+    // --- Mouse ---
+    function mousePressed(){
+      lastMouseX = mouseX; lastMouseY = mouseY;
+      for(let n of allNodes){
+        let d=dist((mouseX-translateX)/scaleFactor,(mouseY-translateY)/scaleFactor,n.x,n.y);
+        if(d<n.size){ draggingNode=n; offsetX=n.x-(mouseX-translateX)/scaleFactor; offsetY=n.y-(mouseY-translateY)/scaleFactor; n.fixed=true; break; }
+      }
+    }
+
+    function mouseDragged(){
+      if(draggingNode){
+        draggingNode.x=(mouseX-translateX)/scaleFactor+offsetX;
+        draggingNode.y=(mouseY-translateY)/scaleFactor+offsetY;
+      } else { // pan
+        translateX += mouseX - lastMouseX;
+        translateY += mouseY - lastMouseY;
+        lastMouseX = mouseX; lastMouseY = mouseY;
+      }
+    }
+
+    function mouseReleased(){ if(draggingNode){ draggingNode.fixed=false; draggingNode=null; } }
+
+    // --- Zoom ---
+    function mouseWheel(event){
+      let zoom = 1 - event.delta/1000;
+      scaleFactor *= zoom;
+      return false;
+    }
+
+    // --- Window resize ---
+    function windowResized() {
+      resizeCanvas(windowWidth * 2, windowHeight * 1.5);
+    }
+  </script>
+</body>
+</html>

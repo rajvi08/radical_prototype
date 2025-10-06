@@ -47,8 +47,14 @@ header .center span {
 }
 
 header .right {
-  width: 100px;
+  width: 280px;
   text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  align-items: center;
+  transform: none; /* Horizontal again */
+  margin-top: 0; /* Reset margin */
 }
 
 header .right a {
@@ -56,6 +62,16 @@ header .right a {
   text-decoration: none;
   font-weight: 400;
   font-family: 'Mini Pixel-7', monospace;
+  display: inline-block;
+  padding: 0 6px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+/* Make all header tabs diagonal */
+header .right a {
+  transform: rotate(-45deg);
+  transform-origin: center;
 }
 
 header .right a:hover {
@@ -175,10 +191,21 @@ img.content-image {
 }
 
 .content-image-small {
-  width: 50%;
+  width: 140%;
+  max-width: calc(140% - 480px); /* Slightly reduced size while maintaining text alignment */
   height: auto;
   border-radius: 4px;
   flex-shrink: 0;
+  margin: 20px auto; /* Center horizontally */
+  display: block; /* Ensure proper centering */
+  transform: translateX(-20%); /* Center for 140% width */
+}
+
+/* Shift only the two newly added images to the right by a net 150px,
+   compensating for the base centering translateX on .content-image-small */
+.img-shift-right {
+  position: relative;
+  transform: translateX(calc(-20% + 150px));
 }
 
 .image-description {
@@ -426,4 +453,235 @@ img.content-image {
   background: #000000;
   border-radius: 50%;
   z-index: 2;
+}
+
+/* New Terminology Page - Inverse Contrast Styles */
+.terminology-page {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.terminology-page .project-title,
+.terminology-page .section-title {
+  color: #ff006e;
+}
+
+.terminology-page .course-info,
+.terminology-page .project-subtitle,
+.terminology-page .advisor,
+.terminology-page p {
+  color: #ffffff;
+}
+
+.terminology-page .infrastructure-section h3 {
+  color: #ff006e;
+}
+
+.terminology-page .infrastructure-section li {
+  color: #ffffff;
+}
+
+/* Orange branding/header text on black background pages */
+.terminology-page header .left,
+.terminology-page header .left a,
+.terminology-page header .center,
+.terminology-page header .center span {
+  color: #fb5607;
+}
+
+/* Orange header tabs for black background pages */
+.terminology-page header .right a,
+.community-page header .right a {
+  color: #fb5607; /* Orange color for visibility on black background */
+  background-color: rgba(251, 86, 7, 0.1); /* Subtle orange background */
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.terminology-page header .right a:hover,
+.community-page header .right a:hover {
+  color: #fb5607;
+  background-color: rgba(251, 86, 7, 0.2); /* Slightly more orange on hover */
+}
+
+/* Community Page - Black Background Theme */
+.community-page {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.community-page .project-title,
+.community-page .section-title {
+  color: #ff006e;
+}
+
+.community-page .course-info,
+.community-page .project-subtitle,
+.community-page .advisor,
+.community-page p {
+  color: #ffffff;
+}
+
+.community-page .infrastructure-section h3 {
+  color: #ff006e;
+}
+
+.community-page .infrastructure-section li {
+  color: #ffffff;
+}
+
+/* Orange branding/header text on black background pages */
+.community-page header .left,
+.community-page header .left a,
+.community-page header .center,
+.community-page header .center span {
+  color: #fb5607;
+}
+
+/* P5.js Animation Container */
+.p5-animation-container {
+  width: 100%;
+  height: 80vh;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  overflow: hidden;
+  background-color: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Community Animation Container */
+.community-animation-container {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  overflow: hidden;
+  background-color: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+#p5-canvas {
+  border-radius: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Terminology Text Section */
+.terminology-text {
+  background-color: #000000;
+  padding: 0px 0px 60px 0px; /* full width, no side padding */
+  margin-top: -60px; /* shift text up by 60px total (80px - 20px) */
+  color: #ff006e;
+  width: 100%;
+}
+
+.terminology-text h3 {
+  font-family: 'Poxast', 'Mini Pixel-7', sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  color: #ff006e;
+  margin-bottom: 30px;
+  text-transform: none;
+  padding: 0 0px 0 0px; /* full width, no side padding */
+}
+
+.terminology-text p {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 24px;
+  line-height: 1.8;
+  color: #ff006e;
+  margin-bottom: 24px;
+  text-align: left;
+  padding: 0 0px 0 0px; /* full width, no side padding */
+}
+
+.terminology-text p strong {
+  color: #ff006e;
+  font-weight: bold;
+}
+
+/* Posters Collage Styles */
+.posters-collage {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 40px;
+  margin: 40px auto;
+  padding: 0;
+  max-width: 1200px; /* Center the grid */
+  justify-content: center;
+}
+
+.poster-item {
+  background: transparent; /* Remove orange background */
+  border-radius: 12px;
+  padding: 0; /* Remove padding */
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.poster-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+}
+
+.poster-image {
+  width: 100%;
+  height: 500px; /* Increased further */
+  object-fit: cover;
+  border-radius: 2px; /* Further reduced */
+  margin-bottom: 20px;
+}
+
+.poster-placeholder {
+  width: 100%;
+  height: 500px; /* Increased further */
+  background: linear-gradient(135deg, #fb5607, #ff006e);
+  border-radius: 2px; /* Further reduced */
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.placeholder-content {
+  text-align: center;
+  z-index: 1;
+  position: relative;
+}
+
+.placeholder-title {
+  font-family: 'Poxast', 'Mini Pixel-7', sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: #ffffff;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.placeholder-subtitle {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 14px;
+  color: #ffffff;
+  opacity: 0.9;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.poster-title {
+  display: none; /* Hide poster titles */
+}
+
+.poster-desc {
+  display: none; /* Hide poster descriptions */
 }
