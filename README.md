@@ -2,9 +2,9 @@
 
 ## Project Overview
 
-Radical_Prototype is a design research project that explores how architectural systems can integrate **energy, data, and infrastructure** into modular, reconfigurable building elements. The project proposes *Modulons* a self-contained architectural units that can generate, store, and distribute resources such as energy, data, air, and water, while being assembled into larger spatial frameworks.
+Radical_Prototype is a design research project that explores how architectural systems can integrate **energy, data, and infrastructure** into modular, reconfigurable building elements. The project proposes *Modulons* a self-contained architectural unit/block that can generate, store, and distribute resources such as energy, data, air, and water, while being assembled into larger spatial frameworks.
 
-Rather than treating buildings as static envelopes, this project frames architecture as an active system composed of interoperable building blocks whose functions adapt to environmental and geographic conditions—such as water extraction from atmospheric humidity in arid regions, air filtration in polluted contexts, or energy generation based on local climatic availability.
+Rather than treating building surfaces as static envelopes, this project frames architecture as an active system composed of interoperable building blocks whose functions adapt to environmental and geographic conditions, such as water extraction from atmospheric humidity in arid regions, air filtration in polluted contexts, or energy generation based on local climatic availability.
 
 ---
 
