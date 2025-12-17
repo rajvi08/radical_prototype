@@ -5,21 +5,19 @@
   <title>CornellTech</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/poxast" rel="stylesheet">
-  <link href="https://fonts.cdnfonts.com/css/mini-pixel-7" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/itc-eras" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="index-page">
   <header>
     <div class="left">Cornell Tech</div>
     <div class="center">
-      Design Tech<br>
-      <span>DESIGN 8131 Specialization Project 1</span>
+      Design Tech
     </div>
     <div class="right">
       <a href="inspirations.html">Antecedents</a>
-      <a href="community-map.html">Community Map</a>
-      <a href="new-terminology.html">New Terminology</a>
-      <a href="posters.html">Posters</a>
+      <a href="community-map.html">Iterations</a>
+      <a href="details.html">Modulon</a>
       <a href="sketches.html">Sketches</a>
     </div>
   </header>
@@ -34,8 +32,6 @@
     <div class="section-title">The Study of Being</div>
     <div class="course-info">Energy x Data</div>
     <p>Radical_Prototype is my attempt to explore possibilities to intervene in existing systems and imagine a new future. I challange the exisitng assumptions, question boundries by examining the converging trajectory of energy and data growth alongside construction.</p>
-
-    <img src="images/Planetary_Scale_Intervention.png" alt="Planetary Scale Intervention" class="content-image-small img-shift-right">
 
     <div class="section-title">Energy x Data</div>
     
@@ -71,8 +67,188 @@
 
     <div class="section-title">Proposed Intervention</div>
     <p>I am exploring the creation of self-contained ecosystems that generate, store, and distribute both energy and data. Rather than thinking of these units purely as construction elements, I see them as modular service hubs capable of supporting multiple functions simultaneously. Potentially integrated services include: energy management (DC power bus, buffering, storage), compute and networking (edge computing, IoT integration), water and plumbing systems (filtration, circulation), structural and mechanical interfaces for seamless connections, and governance protocols for multi-unit coordination of energy, data, and services.</p>
+
+    <div class="section-title">System Architecture</div>
+    <p>System sequence flow and UML diagram showing the relationships between components in the Programmable Facade system:</p>
     
-    <img src="images/Distributed_Intelligence.png" alt="Distributed Intelligence" class="content-image-small img-shift-right">
+    <div class="sequence-section">
+      <h3>System Sequence Flow</h3>
+      <div class="sequence-flow">
+        <div class="sequence-step">
+          <span class="step-number">1</span>
+          <span class="step-description">Environmental inputs (Sunlight, Wind, RainWater, Data) are detected</span>
+        </div>
+        <div class="sequence-arrow">↓</div>
+        <div class="sequence-step">
+          <span class="step-number">2</span>
+          <span class="step-description">Sensors read and collect environmental data</span>
+        </div>
+        <div class="sequence-arrow">↓</div>
+        <div class="sequence-step">
+          <span class="step-number">3</span>
+          <span class="step-description">Controller processes sensor data and updates rules</span>
+        </div>
+        <div class="sequence-arrow">↓</div>
+        <div class="sequence-step">
+          <span class="step-number">4</span>
+          <span class="step-description">Controller sends commands to Actuators</span>
+        </div>
+        <div class="sequence-arrow">↓</div>
+        <div class="sequence-step">
+          <span class="step-number">5</span>
+          <span class="step-description">Actuators control Modulon movement and positioning</span>
+        </div>
+        <div class="sequence-arrow">↓</div>
+        <div class="sequence-step">
+          <span class="step-number">6</span>
+          <span class="step-description">EnergySystem stores and distributes energy as needed</span>
+        </div>
+        <div class="sequence-arrow">↓</div>
+        <div class="sequence-step">
+          <span class="step-number">7</span>
+          <span class="step-description">ProgrammableFacade adjusts modules and processes data</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="uml-diagram" id="umlDiagram">
+
+      <!-- === UML Classes in New Layout === -->
+      
+      <!-- Row 1: ProgrammableFacade (top) -->
+      <div class="uml-class main-class" id="ProgrammableFacade">
+        <div class="uml-class-name">ProgrammableFacade</div>
+        <div class="uml-attributes">
+          <div>+ModulonType: string</div>
+          <div>+sensors: list&lt;Sensor&gt;</div>
+          <div>+actuators: list&lt;Actuator&gt;</div>
+          <div>+energySystem: EnergySystem</div>
+          <div>+controller: Controller</div>
+        </div>
+        <div class="uml-methods">
+          <div>+processData()</div>
+          <div>+adjustModules()</div>
+        </div>
+      </div>
+
+      <!-- Row 2: Modulon (below ProgrammableFacade) -->
+      <div class="uml-class" id="Modulon">
+        <div class="uml-class-name">Modulon</div>
+        <div class="uml-attributes"><div>+Connection: string</div></div>
+        <div class="uml-methods">
+          <div>+Track()</div>
+          <div>+React()</div>
+          <div>+Direct()</div>
+        </div>
+      </div>
+
+      <!-- Row 3: Environmental Inputs (Sunlight, Wind, RainWater, Data) -->
+      <div class="uml-row">
+        <div class="uml-class" id="Sunlight">
+          <div class="uml-class-name">Sunlight</div>
+          <div class="uml-attributes">
+            <div>+Direction: string</div>
+            <div>+Intensity: int</div>
+          </div>
+          <div class="uml-methods">
+            <div>+trackSunlight()</div>
+            <div>+transferSunlight()</div>
+            <div>+storeSunlight()</div>
+          </div>
+        </div>
+
+        <div class="uml-class" id="Wind">
+          <div class="uml-class-name">Wind</div>
+          <div class="uml-attributes">
+            <div>+Direction: string</div>
+            <div>+Intensity: int</div>
+          </div>
+          <div class="uml-methods">
+            <div>+trackWind()</div>
+            <div>+transferWindEnergy()</div>
+            <div>+storeWindEnergy()</div>
+          </div>
+        </div>
+
+        <div class="uml-class" id="RainWater">
+          <div class="uml-class-name">RainWater</div>
+          <div class="uml-attributes">
+            <div>+Direction: string</div>
+            <div>+Quantity: int</div>
+          </div>
+          <div class="uml-methods">
+            <div>+collectWater()</div>
+            <div>+directWater()</div>
+          </div>
+        </div>
+
+        <div class="uml-class" id="Data">
+          <div class="uml-class-name">Data</div>
+          <div class="uml-attributes">
+            <div>+Direction: string</div>
+            <div>+Speed: int</div>
+          </div>
+          <div class="uml-methods">
+            <div>+trackDataSpeed()</div>
+            <div>+directLight()</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 4: System Components (EnergySystem, Sensor, Controller, Actuator) -->
+      <div class="uml-row">
+        <div class="uml-class" id="EnergySystem">
+          <div class="uml-class-name">EnergySystem</div>
+          <div class="uml-attributes">
+            <div>+energyType: string</div>
+            <div>+storageCapacity: float</div>
+          </div>
+          <div class="uml-methods">
+            <div>+storeEnergy()</div>
+            <div>+distributeEnergy()</div>
+          </div>
+        </div>
+
+        <div class="uml-class" id="Sensor">
+          <div class="uml-class-name">Sensor</div>
+          <div class="uml-attributes"><div>+type: string</div></div>
+          <div class="uml-methods"><div>+readData()</div></div>
+        </div>
+
+        <div class="uml-class" id="Controller">
+          <div class="uml-class-name">Controller</div>
+          <div class="uml-attributes"><div>+algorithmType: string</div></div>
+          <div class="uml-methods">
+            <div>+updateRules()</div>
+            <div>+executeResponse()</div>
+          </div>
+        </div>
+
+        <div class="uml-class" id="Actuator">
+          <div class="uml-class-name">Actuator</div>
+          <div class="uml-attributes"><div>+type: string</div></div>
+          <div class="uml-methods"><div>+performAction()</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="uml-relationships">
+      <div class="relationship">
+        <div class="relationship-label">ProgrammableFacade *-- Modulon (Composition: 1 to many)</div>
+        <div class="relationship-label">ProgrammableFacade *-- Sensor (Composition: 1 to many)</div>
+        <div class="relationship-label">ProgrammableFacade *-- Actuator (Composition: 1 to many)</div>
+        <div class="relationship-label">ProgrammableFacade *-- EnergySystem (Composition: 1 to 1)</div>
+        <div class="relationship-label">ProgrammableFacade *-- Controller (Composition: 1 to 1)</div>
+        <div class="relationship-label">Sensor --> Sunlight (Dependency: reads data)</div>
+        <div class="relationship-label">Sensor --> Wind (Dependency: reads data)</div>
+        <div class="relationship-label">Sensor --> RainWater (Dependency: reads data)</div>
+        <div class="relationship-label">Sensor --> Data (Dependency: reads data)</div>
+        <div class="relationship-label">Actuator --> Modulon (Dependency: controls movement)</div>
+        <div class="relationship-label">Controller --> Sensor (Dependency: processes input)</div>
+        <div class="relationship-label">Controller --> Actuator (Dependency: sends commands)</div>
+        <div class="relationship-label">Controller --> EnergySystem (Dependency: manages power)</div>
+      </div>
+    </div>
 
   </main>
 
@@ -80,5 +256,335 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
   <script src="script.js"></script>
+
+  <!-- UML Diagram Connection Script - Static SVG approach -->
+  <script>
+    let connections = [];
+    let svg, diagram;
+
+    // Event handler functions
+    function handleMouseEnter(event) {
+      const elementId = event.target.id;
+      console.log(`Mouse entered: ${elementId}`);
+      showConnections(elementId);
+    }
+
+    function handleMouseLeave(event) {
+      console.log("Mouse left element");
+      hideAllConnections();
+    }
+
+    // Alternative approach - add hover directly to each element
+    function addHoverToElement(elementId) {
+      const element = document.getElementById(elementId);
+      if (element) {
+        element.addEventListener('mouseenter', function() {
+          console.log(`Direct hover on: ${elementId}`);
+          showConnections(elementId);
+        });
+        
+        element.addEventListener('mouseleave', function() {
+          console.log(`Direct leave from: ${elementId}`);
+          hideAllConnections();
+        });
+      }
+    }
+
+    function initUMLConnections() {
+      console.log("Initializing UML connections...");
+      
+      svg = document.getElementById("umlSvg");
+      diagram = document.getElementById("umlDiagram");
+      
+      if (!svg || !diagram) {
+        console.error("SVG or diagram element not found!");
+        return;
+      }
+
+      // Clear existing content
+      svg.innerHTML = "";
+
+      // Add arrow marker definitions
+      const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+      
+      // Main arrow marker
+      const marker = document.createElementNS("http://www.w3.org/2000/svg", "marker");
+      marker.setAttribute("id", "arrow");
+      marker.setAttribute("markerWidth", "10");
+      marker.setAttribute("markerHeight", "10");
+      marker.setAttribute("refX", "9");
+      marker.setAttribute("refY", "3");
+      marker.setAttribute("orient", "auto");
+      marker.setAttribute("markerUnits", "strokeWidth");
+
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", "M0,0 L0,6 L8,3 z");
+      path.setAttribute("fill", "#ffffff");
+      marker.appendChild(path);
+      defs.appendChild(marker);
+
+      // Composition arrow
+      const compMarker = document.createElementNS("http://www.w3.org/2000/svg", "marker");
+      compMarker.setAttribute("id", "composition");
+      compMarker.setAttribute("markerWidth", "8");
+      compMarker.setAttribute("markerHeight", "8");
+      compMarker.setAttribute("refX", "7");
+      compMarker.setAttribute("refY", "3");
+      compMarker.setAttribute("orient", "auto");
+      compMarker.setAttribute("markerUnits", "strokeWidth");
+
+      const compPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      compPath.setAttribute("d", "M0,0 L5,3 L0,6 L2,3 z");
+      compPath.setAttribute("fill", "#ffffff");
+      compMarker.appendChild(compPath);
+      defs.appendChild(compMarker);
+
+      svg.appendChild(defs);
+
+      // Define connections
+      connections = [
+        {from: "Sunlight", to: "Sensor", type: "dependency", label: "reads"},
+        {from: "Wind", to: "Sensor", type: "dependency", label: "reads"},
+        {from: "RainWater", to: "Sensor", type: "dependency", label: "reads"},
+        {from: "Data", to: "Sensor", type: "dependency", label: "reads"},
+        {from: "Sensor", to: "Controller", type: "dependency", label: "sends data"},
+        {from: "Controller", to: "Actuator", type: "dependency", label: "commands"},
+        {from: "Actuator", to: "Modulon", type: "dependency", label: "controls"},
+        {from: "Modulon", to: "ProgrammableFacade", type: "composition", label: "part of"},
+        {from: "Sunlight", to: "EnergySystem", type: "dependency", label: "harvests"},
+        {from: "Wind", to: "EnergySystem", type: "dependency", label: "harvests"},
+        {from: "RainWater", to: "EnergySystem", type: "dependency", label: "collects"},
+        {from: "EnergySystem", to: "ProgrammableFacade", type: "composition", label: "powers"}
+      ];
+
+      // Get all unique element IDs
+      const allElementIds = [...new Set([
+        ...connections.map(conn => conn.from),
+        ...connections.map(conn => conn.to)
+      ])];
+
+      console.log("All element IDs:", allElementIds);
+
+      // Hover functionality disabled - showing all connections permanently
+      // allElementIds.forEach(elementId => {
+      //   addHoverToElement(elementId);
+      // });
+
+      // Show all connections permanently
+      setTimeout(() => {
+        console.log("Showing all connections permanently...");
+        showAllConnections();
+      }, 1000);
+
+      console.log("UML connections initialized with hover functionality");
+    }
+
+    function showConnections(elementId) {
+      console.log(`Showing connections for: ${elementId}`);
+      
+      if (!svg) {
+        console.error("SVG not found!");
+        return;
+      }
+      
+      // Clear existing connections
+      svg.innerHTML = "";
+      
+      // Re-add arrow markers
+      const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+      
+      const marker = document.createElementNS("http://www.w3.org/2000/svg", "marker");
+      marker.setAttribute("id", "arrow");
+      marker.setAttribute("markerWidth", "12");
+      marker.setAttribute("markerHeight", "12");
+      marker.setAttribute("refX", "11");
+      marker.setAttribute("refY", "3");
+      marker.setAttribute("orient", "auto");
+      marker.setAttribute("markerUnits", "strokeWidth");
+
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", "M0,0 L0,6 L10,3 z");
+      path.setAttribute("fill", "#ffffff");
+      marker.appendChild(path);
+      defs.appendChild(marker);
+
+      const compMarker = document.createElementNS("http://www.w3.org/2000/svg", "marker");
+      compMarker.setAttribute("id", "composition");
+      compMarker.setAttribute("markerWidth", "10");
+      compMarker.setAttribute("markerHeight", "10");
+      compMarker.setAttribute("refX", "9");
+      compMarker.setAttribute("refY", "3");
+      compMarker.setAttribute("orient", "auto");
+      compMarker.setAttribute("markerUnits", "strokeWidth");
+
+      const compPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      compPath.setAttribute("d", "M0,0 L6,3 L0,6 L2,3 z");
+      compPath.setAttribute("fill", "#ffffff");
+      compMarker.appendChild(compPath);
+      defs.appendChild(compMarker);
+
+      svg.appendChild(defs);
+
+      // Show only connections related to the hovered element
+      const relevantConnections = connections.filter(conn => 
+        conn.from === elementId || conn.to === elementId
+      );
+
+      console.log(`Found ${relevantConnections.length} relevant connections:`, relevantConnections);
+
+      relevantConnections.forEach(connection => {
+        drawConnection(connection);
+      });
+    }
+
+    function hideAllConnections() {
+      if (svg) {
+        svg.innerHTML = "";
+      }
+    }
+
+    function showAllConnections() {
+      console.log("Showing all connections...");
+      
+      if (!svg) {
+        console.error("SVG not found!");
+        return;
+      }
+      
+      // Clear existing connections
+      svg.innerHTML = "";
+      
+      // Re-add arrow markers
+      const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+      
+      const marker = document.createElementNS("http://www.w3.org/2000/svg", "marker");
+      marker.setAttribute("id", "arrow");
+      marker.setAttribute("markerWidth", "12");
+      marker.setAttribute("markerHeight", "12");
+      marker.setAttribute("refX", "11");
+      marker.setAttribute("refY", "3");
+      marker.setAttribute("orient", "auto");
+      marker.setAttribute("markerUnits", "strokeWidth");
+
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", "M0,0 L0,6 L10,3 z");
+      path.setAttribute("fill", "#ffffff");
+      marker.appendChild(path);
+      defs.appendChild(marker);
+
+      const compMarker = document.createElementNS("http://www.w3.org/2000/svg", "marker");
+      compMarker.setAttribute("id", "composition");
+      compMarker.setAttribute("markerWidth", "10");
+      compMarker.setAttribute("markerHeight", "10");
+      compMarker.setAttribute("refX", "9");
+      compMarker.setAttribute("refY", "3");
+      compMarker.setAttribute("orient", "auto");
+      compMarker.setAttribute("markerUnits", "strokeWidth");
+
+      const compPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      compPath.setAttribute("d", "M0,0 L6,3 L0,6 L2,3 z");
+      compPath.setAttribute("fill", "#ffffff");
+      compMarker.appendChild(compPath);
+      defs.appendChild(compMarker);
+
+      svg.appendChild(defs);
+
+      // Show all connections
+      connections.forEach(connection => {
+        drawConnection(connection);
+      });
+    }
+
+    function drawConnection(connection) {
+      console.log(`Drawing connection: ${connection.from} -> ${connection.to}`);
+      
+      const fromEl = document.getElementById(connection.from);
+      const toEl = document.getElementById(connection.to);
+      
+      if (!fromEl) {
+        console.error(`Element not found: ${connection.from}`);
+        return;
+      }
+      
+      if (!toEl) {
+        console.error(`Element not found: ${connection.to}`);
+        return;
+      }
+
+      const fromRect = fromEl.getBoundingClientRect();
+      const toRect = toEl.getBoundingClientRect();
+      const diagramRect = diagram.getBoundingClientRect();
+
+      const x1 = fromRect.left + fromRect.width / 2 - diagramRect.left;
+      const y1 = fromRect.top + fromRect.height / 2 - diagramRect.top;
+      const x2 = toRect.left + toRect.width / 2 - diagramRect.left;
+      const y2 = toRect.top + toRect.height / 2 - diagramRect.top;
+
+      console.log(`Line coordinates: (${x1},${y1}) -> (${x2},${y2})`);
+
+      // Create the connection line
+      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line.setAttribute("x1", x1);
+      line.setAttribute("y1", y1);
+      line.setAttribute("x2", x2);
+      line.setAttribute("y2", y2);
+      line.setAttribute("stroke", "#ffffff");
+      line.setAttribute("stroke-width", "4");
+      
+      if (connection.type === "composition") {
+        line.setAttribute("marker-end", "url(#composition)");
+        line.setAttribute("stroke-dasharray", "none");
+      } else {
+        line.setAttribute("marker-end", "url(#arrow)");
+        line.setAttribute("stroke-dasharray", "4,2");
+      }
+      
+      line.style.opacity = "1.0";
+      svg.appendChild(line);
+
+      // Add label aligned with line direction
+      const midX = (x1 + x2) / 2;
+      const midY = (y1 + y2) / 2;
+      const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+      
+      const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      label.setAttribute("x", midX);
+      label.setAttribute("y", midY - 8);
+      label.setAttribute("text-anchor", "middle");
+      label.setAttribute("font-family", "Arial, sans-serif");
+      label.setAttribute("font-size", "9");
+      label.setAttribute("fill", "#ffffff");
+      label.setAttribute("opacity", "1.0");
+      label.setAttribute("transform", `rotate(${angle} ${midX} ${midY - 8})`);
+      label.textContent = connection.label;
+      
+      // Add background rectangle
+      const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      rect.setAttribute("x", midX - 15);
+      rect.setAttribute("y", midY - 15);
+      rect.setAttribute("width", "30");
+      rect.setAttribute("height", "10");
+      rect.setAttribute("fill", "rgba(0,0,0,0.7)");
+      rect.setAttribute("rx", "2");
+      rect.setAttribute("ry", "2");
+      rect.setAttribute("transform", `rotate(${angle} ${midX} ${midY - 10})`);
+      
+      svg.appendChild(rect);
+      svg.appendChild(label);
+      
+      console.log(`Successfully drew connection: ${connection.from} -> ${connection.to}`);
+    }
+
+    // Initialize when page loads
+    window.addEventListener("load", () => {
+      console.log("Window loaded, starting UML connections...");
+      setTimeout(initUMLConnections, 500);
+    });
+
+    // Redraw on resize
+    window.addEventListener("resize", () => {
+      setTimeout(initUMLConnections, 100);
+    });
+  </script>
 </body>
 </html>

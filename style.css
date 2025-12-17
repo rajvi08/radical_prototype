@@ -1,15 +1,191 @@
 /* Swiss Design - Minimal Typography */
 /* Using system fonts for maximum compatibility and minimal aesthetic */
 
+/* Eras Light ITC Font */
+@font-face {
+  font-family: 'Eras Light ITC';
+  src: local('Eras Light ITC'),
+       local('ErasITC-Light'),
+       url('https://fonts.cdnfonts.com/s/14847/ITC Eras Light.woff') format('woff'),
+       url('https://fonts.cdnfonts.com/s/14847/ITC Eras Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Guardian Font for Headings */
+@font-face {
+  font-family: 'Guardian';
+  src: url('sketches/guardianexpand.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Avenir Next LT Pro Demi for Body Text */
+@font-face {
+  font-family: 'Avenir Next LT Pro Demi';
+  src: url('fonts/AvenirNextLTPro-Demi.otf') format('opentype'),
+       url('fonts/AvenirNextLTPro-Demi.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@keyframes metalShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 body {
-  font-family: 'Mini Pixel-7', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
-  background-color: #ff006e;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  background: #e8e8e8; /* Light grey */
   color: #000000;
   margin: 0;
   padding: 0;
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: -0.01em;
+  position: relative;
+  overflow-x: hidden;
 }
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('noise.png');
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Index page with light yellow background */
+body.index-page {
+  background: #e8e8e8; /* Light grey */
+  position: relative;
+}
+
+body.index-page::before {
+  display: none; /* Hide noise texture on index page */
+}
+
+/* Header with background image on index page */
+body.index-page header {
+  background-image: url('sketches/intro img2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 120px; /* Increased thickness */
+  padding: 40px 40px !important; /* Increased padding for more thickness */
+}
+
+/* Header with background image on Modulon page */
+body.community-page header {
+  background-image: url('sketches/intro bricks.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 120px; /* Match Antecedents page header height */
+  padding: 40px 40px !important; /* Match Antecedents page header padding */
+  border-bottom: 1px solid #333; /* Consistent border height */
+}
+
+/* Header with background image on Story page */
+body.sketches-page header {
+  background-image: url('sketches/stackedmod.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 120px; /* Increased thickness */
+  padding: 40px 40px !important; /* Increased padding for more thickness */
+}
+
+/* Header with background image on Antecedents/Inspirations page */
+body.inspirations-page header {
+  background-image: url('sketches/colored strip.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 120px; /* Match Iterations page header height */
+  padding: 40px 40px !important; /* Match Iterations page header padding */
+  border-bottom: 1px solid #333; /* Consistent border height */
+}
+
+/* Details page - full screen images */
+body.details-page {
+  overflow-x: hidden;
+  background: #e8e8e8; /* Light grey background to match other pages */
+}
+
+body.details-page header {
+  min-height: 120px; /* Match Antecedents page header height */
+  padding: 40px 40px !important; /* Match Antecedents page header padding */
+  border-bottom: 1px solid #333; /* Consistent border height */
+}
+
+/* Pinkish tabs for Modulon page */
+.details-page header .left a {
+  background-color: rgba(255, 0, 110, 0.2); /* Pinkish translucent tab background */
+}
+
+.details-page header .left a:hover {
+  background-color: rgba(255, 0, 110, 0.35); /* More opaque pink on hover */
+}
+
+.details-page header .right a {
+  background-color: rgba(255, 0, 110, 0.2); /* Pinkish translucent tab background */
+}
+
+.details-page header .right a:hover {
+  background-color: rgba(255, 0, 110, 0.35); /* More opaque pink on hover */
+}
+
+body.details-page main {
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  padding-top: 60px; /* Shift images down */
+}
+
+body.details-page main .section-title {
+  text-align: center;
+  margin: 60px 0 40px 0;
+  width: 100%;
+}
+
+body.details-page main img {
+  width: 100vw;
+  max-width: 100vw;
+  height: auto;
+  max-height: 120vh;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto; /* Center the images */
+  margin-bottom: 80px; /* Vertical distance between images */
+  padding: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Slight shadow effect */
+}
+
+
+/* Exclude canvas from frosted effect */
+body.index-page canvas,
+body.index-page .threejs-container {
+  background: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
 
 header {
   display: flex;
@@ -19,31 +195,41 @@ header {
   padding: 24px 40px;
   border-bottom: 1px solid #333;
   font-size: 19px;
-  font-family: 'Mini Pixel-7', monospace;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  position: relative;
+  z-index: 1;
 }
 
 header .left {
   color: #000000;
   width: 100px;
   font-size: 21px;
-  font-weight: 500;
-  font-family: 'Mini Pixel-7', monospace;
+  font-weight: 700;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
   white-space: nowrap; /* keep "Cornell Tech" on a single line */
 }
 
+header .left a {
+  background-color: rgba(255, 255, 255, 0.3); /* Whitish translucent tab background */
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
 header .center {
-  font-weight: 400;
+  font-weight: 700;
   text-align: left;
   margin-left: 100px;
   flex-grow: 1;
   color: #000000;
-  font-family: 'Mini Pixel-7', monospace;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
 }
 
 header .center span {
   font-size: 17px;
   color: #000000;
-  font-family: 'Mini Pixel-7', monospace;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
 }
 
 header .right {
@@ -60,12 +246,15 @@ header .right {
 header .right a {
   color: #000000;
   text-decoration: none;
-  font-weight: 400;
-  font-family: 'Mini Pixel-7', monospace;
+  font-weight: 700;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
   display: inline-block;
-  padding: 0 6px;
+  padding: 4px 8px;
   font-size: 13px;
   white-space: nowrap;
+  background-color: rgba(255, 255, 255, 0.3); /* Whitish translucent tab background */
+  border-radius: 4px;
+  transition: all 0.3s ease;
 }
 
 /* Make all header tabs diagonal */
@@ -76,6 +265,11 @@ header .right a {
 
 header .right a:hover {
   color: #000000;
+  background-color: rgba(255, 255, 255, 0.5); /* More opaque white on hover */
+}
+
+header .left a:hover {
+  background-color: rgba(255, 255, 255, 0.5); /* More opaque white on hover */
 }
 
 main {
@@ -83,54 +277,63 @@ main {
   margin: 60px 0;
   padding-left: 240px; /* align with header center start */
   padding-right: 200px; /* reduce content length on the right */
+  position: relative;
+  z-index: 1;
 }
 
 .project-meta {
-  font-size: 19px;
+  font-size: 21px;
   color: #000000;
   margin-bottom: 8px;
-  font-family: 'Mini Pixel-7', monospace;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
 }
 
 .project-title {
-  font-size: 31px;
-  font-weight: 400;
+  font-size: 57px;
+  font-weight: 700;
   margin-bottom: 4px;
   color: #000000;
-  font-family: 'Poxast', 'Mini Pixel-7', sans-serif;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
 }
 
 .course-info {
-  font-size: 19px;
+  font-size: 21px;
   color: #000000;
   margin-bottom: 8px;
-  font-weight: 400;
+  font-weight: 700;
   letter-spacing: 0.5px;
-  font-family: 'Mini Pixel-7', monospace;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
 }
 
 .project-subtitle {
   font-size: 21px;
   color: #000000;
   margin-bottom: 24px;
-  font-family: 'Mini Pixel-7', monospace;
+  font-weight: 700;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
 }
 
 .advisor {
-  font-size: 19px;
+  font-size: 21px;
   margin-bottom: 40px;
   color: #000000;
-  font-family: 'Mini Pixel-7', monospace;
+  font-weight: 700;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
 }
 
 .section-title {
-  font-weight: 400;
+  font-weight: 700;
   text-transform: none;
   margin-top: 40px;
   margin-bottom: 12px;
-  font-size: 31px;
+  font-size: 57px;
   color: #000000;
-  font-family: 'Poxast', 'Mini Pixel-7', sans-serif;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+}
+
+/* Remove top margin from first section-title to match headspace with other pages */
+main > .section-title:first-child {
+  margin-top: 0;
 }
 
 p {
@@ -140,7 +343,8 @@ p {
   color: #000000;
   text-align: justify;
   text-justify: inter-word;
-  font-family: "Courier New", Courier, monospace;
+  font-weight: 400;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
 }
 
 .infrastructure-section {
@@ -148,9 +352,9 @@ p {
 }
 
 .infrastructure-section h3 {
-  font-family: 'Mini Pixel-7', monospace;
-  font-size: 19px;
-  font-weight: 400;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  font-size: 21px;
+  font-weight: 700;
   color: #000000;
   margin-bottom: 15px;
   text-transform: none;
@@ -163,10 +367,11 @@ p {
 }
 
 .infrastructure-section li {
-  font-family: "Courier New", Courier, monospace;
-  font-size: 18px;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  font-size: 21px;
   line-height: 1.6;
   color: #000000;
+  font-weight: 400;
   margin-bottom: 8px;
   padding-left: 0;
 }
@@ -222,7 +427,7 @@ img.content-image {
   line-height: 1.4;
   color: #000000;
   text-align: left;
-  font-family: 'Mini Pixel-7', monospace;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
 }
 
 .image-description p:last-child {
@@ -263,7 +468,7 @@ img.content-image {
   border: none;
   padding: 16px 32px;
   font-size: 21px;
-  font-weight: 500;
+  font-weight: 700;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -315,7 +520,7 @@ img.content-image {
   border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 8px 16px;
   font-size: 17px;
-  font-weight: 300;
+  font-weight: 700;
   border-radius: 2px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -353,9 +558,9 @@ img.content-image {
   left: -155px;
   top: 700px;
   transform: rotate(-90deg) scale(3);
-  font-family: 'Poxast', 'Mini Pixel-7', sans-serif;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 700;
   color: #cc0052;
   white-space: nowrap;
 }
@@ -365,9 +570,9 @@ img.content-image {
   bottom: 20px;
   left: 210px;
   transform: scale(3);
-  font-family: 'Poxast', 'Mini Pixel-7', sans-serif;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 700;
   color: #cc0052;
 }
 
@@ -387,7 +592,7 @@ img.content-image {
 }
 
 .map-box {
-  background: #ffbe0b;
+  background: transparent;
   border: none;
   border-radius: 12px;
   padding: 16px;
@@ -395,6 +600,31 @@ img.content-image {
   max-width: 200px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.map-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('sketches/colored strip.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(4px);
+  z-index: 0;
+  opacity: 0.6;
+}
+
+.map-box img,
+.map-box .map-title,
+.map-box .map-desc {
+  position: relative;
+  z-index: 1;
 }
 
 .map-box:hover {
@@ -411,18 +641,19 @@ img.content-image {
 }
 
 .map-title {
-  font-family: 'Poxast', 'Mini Pixel-7', sans-serif;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 700;
   color: #000000;
   margin-bottom: 8px;
   line-height: 1.2;
 }
 
 .map-desc {
-  font-family: "Courier New", Courier, monospace;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
   font-size: 12px;
   color: #000000;
+  font-weight: 400;
   line-height: 1.3;
 }
 
@@ -455,10 +686,11 @@ img.content-image {
   z-index: 2;
 }
 
-/* New Terminology Page - Inverse Contrast Styles */
+/* New Terminology Page - Chrome Background Theme (Three.js overlay) */
 .terminology-page {
-  background-color: #000000;
-  color: #ffffff;
+  background: #e8e8e8; /* Light grey */
+  color: #000000;
+  position: relative;
 }
 
 .terminology-page .project-title,
@@ -470,7 +702,7 @@ img.content-image {
 .terminology-page .project-subtitle,
 .terminology-page .advisor,
 .terminology-page p {
-  color: #ffffff;
+  color: #000000;
 }
 
 .terminology-page .infrastructure-section h3 {
@@ -478,22 +710,22 @@ img.content-image {
 }
 
 .terminology-page .infrastructure-section li {
-  color: #ffffff;
+  color: #000000;
 }
 
-/* Orange branding/header text on black background pages */
+/* Header text on white background pages */
 .terminology-page header .left,
 .terminology-page header .left a,
 .terminology-page header .center,
 .terminology-page header .center span {
-  color: #fb5607;
+  color: #000000;
 }
 
-/* Orange header tabs for black background pages */
+/* Header tabs for white background pages */
 .terminology-page header .right a,
 .community-page header .right a {
-  color: #fb5607; /* Orange color for visibility on black background */
-  background-color: rgba(251, 86, 7, 0.1); /* Subtle orange background */
+  color: #000000; /* Black color for visibility on white background */
+  background-color: rgba(255, 255, 255, 0.3); /* Whitish translucent tab background */
   padding: 4px 8px;
   border-radius: 4px;
   transition: all 0.3s ease;
@@ -501,26 +733,31 @@ img.content-image {
 
 .terminology-page header .right a:hover,
 .community-page header .right a:hover {
-  color: #fb5607;
-  background-color: rgba(251, 86, 7, 0.2); /* Slightly more orange on hover */
+  color: #000000;
+  background-color: rgba(255, 255, 255, 0.5); /* More opaque white on hover */
 }
 
-/* Community Page - Black Background Theme */
+/* Community Page - Light yellow background */
 .community-page {
-  background-color: #000000;
-  color: #ffffff;
+  background: #e8e8e8; /* Light grey */
+  color: #000000;
+  position: relative;
 }
 
 .community-page .project-title,
 .community-page .section-title {
-  color: #ff006e;
+  color: #000000;
 }
 
 .community-page .course-info,
 .community-page .project-subtitle,
 .community-page .advisor,
 .community-page p {
-  color: #ffffff;
+  color: #000000;
+}
+
+.community-page .course-info {
+  font-weight: 400; /* Not bold */
 }
 
 .community-page .infrastructure-section h3 {
@@ -528,15 +765,36 @@ img.content-image {
 }
 
 .community-page .infrastructure-section li {
-  color: #ffffff;
+  color: #000000;
 }
 
-/* Orange branding/header text on black background pages */
+/* Header text on white background pages */
+.community-page header {
+  font-size: 19px; /* Match base header font-size */
+}
+
 .community-page header .left,
 .community-page header .left a,
 .community-page header .center,
 .community-page header .center span {
-  color: #fb5607;
+  color: #000000;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+}
+
+.community-page header .left,
+.community-page header .left a {
+  font-size: 21px; /* Match base header .left font-size */
+  font-weight: 700;
+}
+
+.community-page header .center {
+  font-size: 19px; /* Match base header font-size */
+  font-weight: 700;
+}
+
+/* Add spacing below text before first image in iterations section */
+.community-page main .course-info + img {
+  margin-top: 40px;
 }
 
 /* P5.js Animation Container */
@@ -585,9 +843,9 @@ img.content-image {
 }
 
 .terminology-text h3 {
-  font-family: 'Poxast', 'Mini Pixel-7', sans-serif;
-  font-size: 32px;
-  font-weight: 400;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  font-size: 64px;
+  font-weight: 700;
   color: #ff006e;
   margin-bottom: 30px;
   text-transform: none;
@@ -595,10 +853,11 @@ img.content-image {
 }
 
 .terminology-text p {
-  font-family: "Courier New", Courier, monospace;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
   font-size: 24px;
   line-height: 1.8;
   color: #ff006e;
+  font-weight: 400;
   margin-bottom: 24px;
   text-align: left;
   padding: 0 0px 0 0px; /* full width, no side padding */
@@ -662,18 +921,19 @@ img.content-image {
 }
 
 .placeholder-title {
-  font-family: 'Poxast', 'Mini Pixel-7', sans-serif;
-  font-size: 24px;
-  font-weight: 400;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  font-size: 48px;
+  font-weight: 700;
   color: #ffffff;
   margin-bottom: 8px;
   text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 .placeholder-subtitle {
-  font-family: "Courier New", Courier, monospace;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
   font-size: 14px;
   color: #ffffff;
+  font-weight: 400;
   opacity: 0.9;
   text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
@@ -694,9 +954,9 @@ img.content-image {
 }
 
 .company-gallery h2 {
-  font-family: 'Poxast', 'Mini Pixel-7', sans-serif;
-  font-size: 32px;
-  font-weight: 400;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  font-size: 64px;
+  font-weight: 700;
   color: #000000;
   text-align: center;
   margin-bottom: 50px;
@@ -708,9 +968,9 @@ img.content-image {
 }
 
 .category-title {
-  font-family: 'Poxast', 'Mini Pixel-7', sans-serif;
-  font-size: 24px;
-  font-weight: 400;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  font-size: 48px;
+  font-weight: 700;
   margin-bottom: 30px;
   padding: 15px 0;
   border-bottom: 2px solid;
@@ -766,12 +1026,12 @@ img.content-image {
 .company-card .placeholder {
   width: 100%;
   height: 200px;
-  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  background: #ffffff;
   border-radius: 12px 12px 0 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
   font-size: 16px;
   font-weight: 600;
   color: #6c757d;
@@ -780,9 +1040,9 @@ img.content-image {
 }
 
 .company-card h4 {
-  font-family: 'Mini Pixel-7', monospace;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
   color: #000000;
   margin: 20px 0;
   padding: 0 15px;
@@ -796,12 +1056,12 @@ img.content-image {
   }
   
   .company-gallery h2 {
-    font-size: 28px;
+    font-size: 56px;
     margin-bottom: 40px;
   }
   
   .category-title {
-    font-size: 20px;
+    font-size: 40px;
     margin-bottom: 25px;
   }
   
@@ -833,43 +1093,107 @@ img.content-image {
   }
 }
 
-/* Sketches Page Styles */
+/* Sketches Page Styles - Light yellow background */
 .sketches-page {
-  background-color: #ff006e;
+  background: #e8e8e8; /* Light grey */
+  color: #000000;
+  position: relative;
+}
+
+.sketches-page .project-title {
+  color: #ff006e;
+}
+
+.sketches-page .section-title {
+  color: #000000;
+}
+
+.sketches-page .course-info,
+.sketches-page .project-subtitle,
+.sketches-page .advisor,
+.sketches-page p {
+  color: #000000;
+}
+
+/* Header text on white background pages */
+.sketches-page header .left,
+.sketches-page header .left a,
+.sketches-page header .center,
+.sketches-page header .center span {
+  color: #000000;
+}
+
+.sketches-page header .right a {
+  color: #000000;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.sketches-page header .right a:hover {
+  color: #000000;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .sketches-gallery {
   margin: 60px auto;
   padding: 0 40px;
-  max-width: 1200px;
-  display: flex;
-  flex-direction: column;
-  gap: 80px;
+  max-width: 1400px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.sketches-gallery img.sketch-item {
+  width: 100%;
+  height: 280px;
+  display: block;
+  border-radius: 12px;
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  object-fit: cover;
+  box-shadow: none;
+}
+
+.sketches-gallery img.sketch-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
 .sketch-item {
   display: flex;
-  align-items: center;
-  gap: 60px;
-  background: #ffbe0b;
+  flex-direction: column;
+  gap: 30px;
+  background: #1a1a1a;
+  border: 2px solid #ff006e;
   border-radius: 16px;
   padding: 40px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 32px rgba(255, 0, 110, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .sketch-item:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.15);
+  box-shadow: 0 16px 48px rgba(255, 0, 110, 0.3);
+  border-color: #ff006e;
 }
 
 .sketch-item:nth-child(even) {
-  flex-direction: row-reverse;
+  border-color: #fb5607;
+  box-shadow: 0 8px 32px rgba(251, 86, 7, 0.2);
+}
+
+.sketch-item:nth-child(even):hover {
+  box-shadow: 0 16px 48px rgba(251, 86, 7, 0.3);
+  border-color: #fb5607;
 }
 
 .sketch-image-container {
+  width: 100%;
   flex: 1;
-  max-width: 500px;
 }
 
 .sketch-image {
@@ -877,28 +1201,34 @@ img.content-image {
   height: auto;
   border-radius: 12px;
   object-fit: cover;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
 }
 
 .sketch-info {
-  flex: 1;
-  padding: 20px 0;
+  width: 100%;
+  padding: 0;
 }
 
 .sketch-title {
-  font-family: 'Poxast', 'Mini Pixel-7', sans-serif;
-  font-size: 28px;
-  font-weight: 400;
-  color: #000000;
-  margin-bottom: 20px;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  font-size: 56px;
+  font-weight: 700;
+  color: #ff006e;
+  margin-bottom: 15px;
+  margin-top: 0;
   letter-spacing: -0.02em;
 }
 
+.sketch-item:nth-child(even) .sketch-title {
+  color: #fb5607;
+}
+
 .sketch-description {
-  font-family: 'Mini Pixel-7', monospace;
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6;
-  color: #333333;
+  color: #000000;
+  font-weight: 700;
   margin: 0;
 }
 
@@ -910,22 +1240,13 @@ img.content-image {
   }
   
   .sketch-item {
-    flex-direction: column !important;
-    gap: 30px;
+    gap: 25px;
     padding: 30px;
   }
   
-  .sketch-item:nth-child(even) {
-    flex-direction: column !important;
-  }
-  
-  .sketch-image-container {
-    max-width: 100%;
-  }
-  
   .sketch-title {
-    font-size: 24px;
-    margin-bottom: 15px;
+    font-size: 48px;
+    margin-bottom: 12px;
   }
   
   .sketch-description {
@@ -940,13 +1261,413 @@ img.content-image {
   
   .sketch-item {
     padding: 20px;
+    gap: 20px;
   }
   
   .sketch-title {
-    font-size: 20px;
+    font-size: 40px;
+    margin-bottom: 10px;
   }
   
   .sketch-description {
     font-size: 13px;
+  }
+}
+
+/* Fullscreen Sketch Modal */
+.sketch-fullscreen-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.sketch-fullscreen-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.95);
+  cursor: pointer;
+}
+
+.sketch-fullscreen-content {
+  position: relative;
+  width: 95%;
+  height: 95%;
+  max-width: 95vw;
+  max-height: 95vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+}
+
+.sketch-fullscreen-img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(255, 0, 110, 0.3);
+}
+
+.sketch-fullscreen-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: rgba(255, 0, 110, 0.8);
+  color: #ffffff;
+  border: none;
+  width: 50px;
+  height: 50px;
+  font-size: 36px;
+  font-weight: 700;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10002;
+  transition: all 0.3s ease;
+  line-height: 1;
+  padding: 0;
+}
+
+.sketch-fullscreen-close:hover {
+  background-color: rgba(255, 0, 110, 1);
+  transform: scale(1.1);
+}
+
+.sketch-fullscreen-close:active {
+  transform: scale(0.95);
+}
+
+/* Make sketch items clickable - cursor already set in JavaScript */
+
+/* Context Image Section */
+.context-section {
+  margin: 40px 0;
+  text-align: center;
+}
+
+.context-image-container {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.context-image {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.context-image:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
+}
+
+/* UML Diagram Styles */
+.uml-diagram {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin: 40px 0;
+  padding: 40px;
+  max-width: 1400px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Row layouts for different sections */
+.uml-diagram > .uml-class:first-child {
+  /* ProgrammableFacade - full width at top */
+  align-self: center;
+  max-width: 400px;
+}
+
+.uml-diagram > .uml-class:nth-child(2) {
+  /* Modulon - centered below ProgrammableFacade */
+  align-self: center;
+  max-width: 300px;
+}
+
+/* Row containers */
+.uml-row {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.uml-row .uml-class {
+  flex: 1;
+  min-width: 200px;
+  max-width: 250px;
+}
+
+.uml-class {
+  background: #ffbe0b;
+  border: 2px solid #333333;
+  border-radius: 8px;
+  padding: 0;
+  min-width: 150px;
+  max-width: 180px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 2;
+  position: relative;
+  cursor: pointer;
+}
+
+.uml-class:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.uml-class.main-class {
+  background: #ffbe0b;
+  border-color: #ff006e;
+  border-width: 3px;
+  grid-column: 1 / -1;
+  max-width: 100%;
+}
+
+/* === SVG overlay for connections === */
+.uml-svg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 1;
+}
+
+.uml-class-name {
+  background: #333333;
+  color: #ffffff;
+  font-family: 'Eras Light ITC', 'Guardian', sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 6px 10px;
+  text-align: center;
+  border-bottom: 2px solid #333333;
+}
+
+.main-class .uml-class-name {
+  background: #ff006e;
+  color: #ffffff;
+}
+
+.uml-attributes {
+  background: #fff3cd;
+  padding: 4px 8px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.uml-attributes div {
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  font-size: 8px;
+  color: #333333;
+  margin: 1px 0;
+  padding: 0;
+}
+
+.uml-methods {
+  background: #fff3cd;
+  padding: 4px 8px;
+}
+
+.uml-methods div {
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  font-size: 8px;
+  color: #333333;
+  margin: 1px 0;
+  padding: 0;
+}
+
+.uml-relationships {
+  margin: 30px 0;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.relationship {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.relationship-label {
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  font-size: 14px;
+  color: #000000;
+  background: #e8e8e8;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border-left: 3px solid #ffbe0b;
+}
+
+/* Responsive Design for UML */
+@media (max-width: 768px) {
+  .uml-diagram {
+    grid-template-columns: 1fr;
+    padding: 20px;
+    gap: 25px;
+    max-width: 100%;
+  }
+  
+  .uml-class {
+    min-width: auto;
+    max-width: 100%;
+  }
+  
+  .uml-class-name {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+  
+  .uml-attributes div,
+  .uml-methods div {
+    font-size: 9px;
+  }
+  
+  .relationship-label {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+  
+  .uml-svg {
+    display: none; /* Hide connections on mobile for simplicity */
+  }
+}
+
+/* Sequence Flow Styles */
+.sequence-section {
+  margin: 40px 0;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sequence-section h3 {
+  font-family: 'Eras Light ITC', 'Guardian', sans-serif;
+  font-size: 48px;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 30px;
+  letter-spacing: 2px;
+}
+
+.sequence-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.sequence-step {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #ffbe0b;
+  padding: 15px 25px;
+  border-radius: 8px;
+  border: 2px solid #333333;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-width: 400px;
+  max-width: 600px;
+}
+
+.sequence-step:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.step-number {
+  background: #ff006e;
+  color: #ffffff;
+  font-family: 'Eras Light ITC', 'Guardian', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.step-description {
+  font-family: 'ITC Eras', 'Eras Light ITC', 'Eras ITC', 'Avenir Next LT Pro Demi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  font-size: 21px;
+  color: #333333;
+  line-height: 1.4;
+}
+
+.sequence-arrow {
+  font-size: 24px;
+  color: #ffbe0b;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+/* Responsive Design for Sequence */
+@media (max-width: 768px) {
+  .sequence-section {
+    padding: 20px;
+  }
+  
+  .sequence-section h3 {
+    font-size: 20px;
+  }
+  
+  .sequence-step {
+    min-width: auto;
+    max-width: 100%;
+    padding: 12px 20px;
+    gap: 15px;
+  }
+  
+  .step-number {
+    width: 25px;
+    height: 25px;
+    font-size: 16px;
+  }
+  
+  .step-description {
+    font-size: 12px;
+  }
+  
+  .sequence-arrow {
+    font-size: 20px;
   }
 }

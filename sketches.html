@@ -5,52 +5,92 @@
   <title>Sketches - Radical_Prototype</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/poxast" rel="stylesheet">
-  <link href="https://fonts.cdnfonts.com/css/mini-pixel-7" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/itc-eras" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="sketches-page">
   <header>
-    <div class="left"><a href="index.html" style="color:#000;text-decoration:none">Cornell Tech</a></div>
+    <div class="left"><a href="index.html" style="color:#000000;text-decoration:none">Cornell Tech</a></div>
     <div class="center">
-      Design Tech<br>
-      <span>DESIGN 8131 Specialization Project 1</span>
+      Design Tech
     </div>
     <div class="right">
       <a href="inspirations.html">Antecedents</a>
-      <a href="community-map.html">Community Map</a>
-      <a href="new-terminology.html">New Terminology</a>
-      <a href="posters.html">Posters</a>
+      <a href="community-map.html">Iterations</a>
+      <a href="details.html">Modulon</a>
       <a href="sketches.html">Sketches</a>
     </div>
   </header>
 
   <main>
-    <div class="project-meta">2025</div>
-    <div class="project-title">Sketches</div>
-    <div class="course-info">Conceptual Explorations</div>
-
+    <h2 class="section-title">Ideation</h2>
     <div class="sketches-gallery">
-      <div class="sketch-item">
-        <div class="sketch-image-container">
-          <img src="images/ontology.jpeg" alt="Ontology Sketch" class="sketch-image">
-        </div>
-        <div class="sketch-info">
-          <h3 class="sketch-title">Ontology</h3>
-          <p class="sketch-description">Conceptual framework exploring the relationships between adaptive, intelligent, and energy systems in architectural design.</p>
-        </div>
-      </div>
-
-      <div class="sketch-item">
-        <div class="sketch-image-container">
-          <img src="images/intervention.jpeg" alt="Intervention Sketch" class="sketch-image">
-        </div>
-        <div class="sketch-info">
-          <h3 class="sketch-title">Intervention</h3>
-          <p class="sketch-description">Spatial intervention strategies for implementing responsive architectural systems in urban environments.</p>
-        </div>
-      </div>
+      <img src="ideation/ontology.jpeg" alt="Ontology" class="sketch-item">
+      <img src="ideation/facade.jpeg" alt="Facade" class="sketch-item">
+      <img src="ideation/intervention.jpeg" alt="Intervention" class="sketch-item">
+      <img src="ideation/modulon.jpg" alt="Modulon" class="sketch-item">
+      <img src="ideation/solar.jpeg" alt="Solar" class="sketch-item">
+      <img src="ideation/filter.jpeg" alt="Filter" class="sketch-item">
+      <img src="ideation/frame.jpeg" alt="Frame" class="sketch-item">
+      <img src="ideation/solar1.jpeg" alt="Solar 1" class="sketch-item">
+      <img src="ideation/systems.jpeg" alt="Systems" class="sketch-item">
+      <img src="ideation/wind.jpeg" alt="Wind" class="sketch-item">
     </div>
-
   </main>
+
+  <!-- Fullscreen Modal -->
+  <div id="sketch-fullscreen-modal" class="sketch-fullscreen-modal">
+    <div class="sketch-fullscreen-overlay"></div>
+    <div class="sketch-fullscreen-content">
+      <button class="sketch-fullscreen-close" aria-label="Close fullscreen">&times;</button>
+      <img id="sketch-fullscreen-image" src="" alt="Fullscreen Sketch" class="sketch-fullscreen-img">
+    </div>
+  </div>
+
+  <script>
+    // Fullscreen sketch viewer
+    const modal = document.getElementById('sketch-fullscreen-modal');
+    const modalImage = document.getElementById('sketch-fullscreen-image');
+    const closeBtn = document.querySelector('.sketch-fullscreen-close');
+    const overlay = document.querySelector('.sketch-fullscreen-overlay');
+    const sketchItems = document.querySelectorAll('.sketches-gallery img.sketch-item');
+
+    // Make sketch images clickable
+    sketchItems.forEach(img => {
+      img.style.cursor = 'pointer';
+      
+      img.addEventListener('click', () => {
+        modalImage.src = img.src;
+        modalImage.alt = img.alt;
+        openFullscreen();
+      });
+    });
+
+    function openFullscreen() {
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeFullscreen() {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close on button click
+    closeBtn.addEventListener('click', closeFullscreen);
+
+    // Close on overlay click
+    overlay.addEventListener('click', closeFullscreen);
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.style.display === 'flex') {
+        closeFullscreen();
+      }
+    });
+  </script>
+  
+  <!-- Three.js for Chromium Background -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </body>
 </html>

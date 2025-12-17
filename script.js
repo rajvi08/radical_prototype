@@ -1,5 +1,5 @@
 // Three.js Ontological Diagram
-let scene, camera, renderer, controls;
+let ontologicalScene, ontologicalCamera, ontologicalRenderer, ontologicalControls;
 let entities = {};
 let connections = [];
 
@@ -37,38 +37,45 @@ const connectionData = [
     ['Generator', 'Data Center Server'] // Direct energy connection to data centers
 ];
 
-function init() {
+function initOntological() {
     // Get canvas element
     const canvas = document.getElementById('threejs-canvas');
     
+    if (!canvas) {
+        console.error('Canvas element not found for ontological diagram');
+        return;
+    }
+    
+    console.log('Initializing ontological diagram...');
+    
     // Scene
-    scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xff006e); // Pink background
+    ontologicalScene = new THREE.Scene();
+    ontologicalScene.background = new THREE.Color(0xffc0cb); // Baby pink background
     
     // Camera
-    camera = new THREE.PerspectiveCamera(
+    ontologicalCamera = new THREE.PerspectiveCamera(
         50, 
         canvas.clientWidth / canvas.clientHeight, 
         0.1,
         1000
     );
-    camera.position.set(0, 5, 20);
+    ontologicalCamera.position.set(0, 5, 20);
     
     // Renderer
-    renderer = new THREE.WebGLRenderer({ 
+    ontologicalRenderer = new THREE.WebGLRenderer({ 
         canvas: canvas,
         antialias: true 
     });
-    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    ontologicalRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
+    ontologicalRenderer.shadowMap.enabled = true;
+    ontologicalRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
     
     // Orbit Controls
-    controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
-    controls.enableZoom = true;
-    controls.enablePan = true;
+    ontologicalControls = new THREE.OrbitControls(ontologicalCamera, ontologicalRenderer.domElement);
+    ontologicalControls.enableDamping = true;
+    ontologicalControls.dampingFactor = 0.05;
+    ontologicalControls.enableZoom = true;
+    ontologicalControls.enablePan = true;
     
     // Grid removed for cleaner look
     
@@ -82,10 +89,11 @@ function init() {
     addLighting();
     
     // Start animation loop
-    animate();
+    animateOntological();
     
     // Handle window resize
     window.addEventListener('resize', onWindowResize);
+    console.log('Ontological diagram initialized');
 }
 
 function createEntities() {
@@ -114,8 +122,8 @@ function createEntities() {
         
         // Store entity
         entities[entityName] = { mesh, label, data };
-        scene.add(mesh);
-        scene.add(label);
+        ontologicalScene.add(mesh);
+        ontologicalScene.add(label);
     });
 }
 
@@ -174,7 +182,7 @@ function createConnections() {
             pipe.castShadow = true;
             pipe.receiveShadow = true;
             
-            scene.add(pipe);
+            ontologicalScene.add(pipe);
             connections.push(pipe);
         }
     });
@@ -183,7 +191,7 @@ function createConnections() {
 function addLighting() {
     // Ambient light for overall illumination
     const ambientLight = new THREE.AmbientLight(0x404040, 0.4);
-    scene.add(ambientLight);
+    ontologicalScene.add(ambientLight);
     
     // Static directional light
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0);
@@ -197,33 +205,40 @@ function addLighting() {
     directionalLight.shadow.camera.right = 10;
     directionalLight.shadow.camera.top = 10;
     directionalLight.shadow.camera.bottom = -10;
-    scene.add(directionalLight);
+    ontologicalScene.add(directionalLight);
     
     // Static point light for additional illumination
     const pointLight = new THREE.PointLight(0xffffff, 0.6, 100);
     pointLight.position.set(-3, 8, 3);
-    scene.add(pointLight);
+    ontologicalScene.add(pointLight);
 }
 
-function animate() {
-    requestAnimationFrame(animate);
+function animateOntological() {
+    requestAnimationFrame(animateOntological);
     
     // Primitives are now static - no rotation
     
     // Update controls
-    controls.update();
+    ontologicalControls.update();
     
     // Render
-    renderer.render(scene, camera);
+    ontologicalRenderer.render(ontologicalScene, ontologicalCamera);
 }
 
 function onWindowResize() {
     const canvas = document.getElementById('threejs-canvas');
-    camera.aspect = canvas.clientWidth / canvas.clientHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+    if (!canvas || !ontologicalCamera || !ontologicalRenderer) return;
+    
+    ontologicalCamera.aspect = canvas.clientWidth / canvas.clientHeight;
+    ontologicalCamera.updateProjectionMatrix();
+    ontologicalRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
 }
 
 // Initialize the scene when the page loads
-window.addEventListener('load', init);
+if (document.readyState === 'loading') {
+    window.addEventListener('load', initOntological);
+} else {
+    // If already loaded, wait a bit for other scripts
+    setTimeout(initOntological, 100);
+}
   
