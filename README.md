@@ -2,9 +2,9 @@
 
 ## Project Overview
 
-Radical_Prototype is a design research project that explores how architectural systems can integrate **energy, data, and infrastructure** into modular, reconfigurable building elements. The project proposes *Modulons* — self-contained architectural units that can generate, store, and distribute resources such as energy, data, air, and water, while being assembled into larger spatial frameworks.
+Radical_Prototype is a design research project that explores how architectural systems can integrate **energy, data, and infrastructure** into modular, reconfigurable building elements. The project proposes *Modulons* a self-contained architectural units that can generate, store, and distribute resources such as energy, data, air, and water, while being assembled into larger spatial frameworks.
 
-Rather than treating buildings as static envelopes, this project frames architecture as an **active system** composed of interoperable units that respond to environmental inputs and infrastructural flows.
+Rather than treating buildings as static envelopes, this project frames architecture as an active system composed of interoperable building blocks whose functions adapt to environmental and geographic conditions—such as water extraction from atmospheric humidity in arid regions, air filtration in polluted contexts, or energy generation based on local climatic availability.
 
 ---
 
@@ -13,12 +13,10 @@ Rather than treating buildings as static envelopes, this project frames architec
 The website was built as a **static web project** using standard web technologies to ensure portability, transparency, and long-term accessibility.
 
 ### Core Technologies
-- **HTML5** — page structure and semantic layout  
-- **CSS3** — typography, layout, visual hierarchy, and responsive behavior  
-- **Vanilla JavaScript** — interactivity and dynamic behavior  
-- **Three.js** — interactive 3D visualizations (ontology diagrams and system relationships)
-
-No backend frameworks or build tools were used. The site runs entirely in the browser and is hosted via **GitHub Pages**.
+- **HTML5** - page structure and semantic layout  
+- **CSS3** - typography, layout, visual hierarchy, and responsive behavior  
+- **Vanilla JavaScript** - interactivity and dynamic behavior  
+- **Three.js** - interactive 3D visualizations (ontology diagrams and system relationships)
 
 ---
 
@@ -30,13 +28,11 @@ No backend frameworks or build tools were used. The site runs entirely in the br
   - Networked entities and flows  
 - **OrbitControls** allow users to explore these diagrams spatially through rotation, zoom, and pan.
 
-These visualizations are conceptual tools rather than simulations, intended to communicate system logic and relationships.
-
 ---
 
 ### AI was used for: 
 - Debugging and optimizing JavaScript logic (especially Three.js interactions)  
-- Cursor for used for iterative design changes to the website
+- Cursor was used for iterative design changes to the website
 
 ---
 
@@ -44,7 +40,7 @@ These visualizations are conceptual tools rather than simulations, intended to c
 
 **Rajvi Ranjit Patil**  
 Architect · Design Technologist  
-Cornell Tech — Design Technology  
+M.S in Design Technology, Cornell Tech  
 Advisor: **Jose Sanchez**
 
 ---
